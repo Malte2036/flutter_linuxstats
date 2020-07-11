@@ -26,14 +26,14 @@ class OwnColors {
   }
 
   static Color get greenColor {
-    return Color.fromRGBO(32, 191, 107, 1);
+    return Color.fromRGBO(0, 242, 115, 1);
   }
 
-  static Color get bronzeColor {
-    return Color.fromRGBO(216, 158, 47, 1);
+  static Color get orangeColor {
+    return Color.fromRGBO(255, 170, 0, 1);
   }
 
   static Color get redColor {
-    return Color.fromRGBO(252, 92, 101, 1);
+    return Color.fromRGBO(255, 50, 50, 1);
   }
 }

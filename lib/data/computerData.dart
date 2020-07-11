@@ -44,7 +44,7 @@ class ComputerData {
       virtual_memory_total: 10367352832,
       virtual_memory_used: 8186245120,
       disk_usage_total: 21378641920,
-      disk_usage_used: 4809781248,
+      disk_usage_used: 17000000000,
     );
   }
 

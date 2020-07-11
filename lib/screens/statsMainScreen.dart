@@ -57,7 +57,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
                           .getVirtualMemoryCompareString(),
                       ComputerData.currentComputerData
                           .getVirtualMemoryPercent(),
-                      OwnColors.bronzeColor),
+                      OwnColors.orangeColor),
                   Padding(padding: EdgeInsets.all(15)),
                   StatsBigWidget(
                       "DISK",
