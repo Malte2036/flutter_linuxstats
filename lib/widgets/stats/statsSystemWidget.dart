@@ -45,7 +45,7 @@ class _StatsSystemWidgetState extends State<StatsSystemWidget> {
                   itemCount: systemDataPrintList.length * 2,
                   itemBuilder: (context, index) {
                     if (index % 2 == 0) {
-                      return Text(systemDataPrintList[(index / 2).toInt()],
+                      return Text(systemDataPrintList[index ~/ 2],
                           style: TextStyle(
                             color: OwnColors.mainColor50,
                             fontSize: 12.5,

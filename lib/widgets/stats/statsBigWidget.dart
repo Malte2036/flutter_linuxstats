@@ -27,17 +27,14 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
         children: <Widget>[
           StatsHeaderWidget(typeString: widget.typeString),
           Container(
-            width: 200,
-            height: 200,
+            width: MediaQuery.of(context).size.width * 0.6,
+            height: MediaQuery.of(context).size.width * 0.6,
             child: Stack(
               children: <Widget>[
                 HalfGaugeChart.fromPercent(widget.percent, widget.color,
                     animate: true),
-                HalfGaugeChart.fromPercent(
-                  1.0,
-                  OwnColors.backgroundColor25,
-                  animate: false,
-                ),
+                HalfGaugeChart.fromPercent(1.0, OwnColors.backgroundColor25,
+                    animate: false),
                 Column(
                   children: <Widget>[
                     Expanded(flex: 55, child: Container()),

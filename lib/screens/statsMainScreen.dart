@@ -27,11 +27,11 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
         child: Row(
           children: <Widget>[
             Expanded(
-              flex: 10,
+              flex: 5,
               child: Container(),
             ),
             Expanded(
-              flex: 80,
+              flex: 90,
               child: ListView(
                 children: <Widget>[
                   Padding(padding: EdgeInsets.all(10)),
@@ -72,7 +72,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
               ),
             ),
             Expanded(
-              flex: 10,
+              flex: 5,
               child: Container(),
             ),
           ],
