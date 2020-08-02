@@ -22,7 +22,6 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      //backgroundColor: OwnColors.backgroundColor,
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
         onRefresh: _refresh,
@@ -34,7 +33,6 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
               child: Text(
                 "malte@ArchLinux",
                 style: TextStyle(
-                  //color: OwnColors.mainColor50,
                   fontSize: ScreenManager.getFontSize(context),
                 ),
               ),
@@ -46,7 +44,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
                 StatsBigWidget(
                     "CPU",
                     ComputerData.currentComputerData.getCPUPercentString(),
-                    ComputerData.currentComputerData.cpu_percent,
+                    ComputerData.currentComputerData.cpuPercent,
                     OwnColors.greenColor),
                 StatsBigWidget(
                     "MEMORY",
