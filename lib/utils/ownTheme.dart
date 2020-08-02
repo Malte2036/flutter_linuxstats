@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_linuxstats/utils/ownColors.dart';
 
 class OwnTheme with ChangeNotifier {
   static OwnTheme currentOwnTheme = new OwnTheme();
@@ -14,6 +15,7 @@ class OwnTheme with ChangeNotifier {
     fontFamily: 'RobotoMono',
     brightness: Brightness.dark,
     cardColor: Color.fromRGBO(255, 255, 255, 0.25),
+    accentColor: OwnColors.greenColor,
   );
 
   static bool isLightTheme() {
