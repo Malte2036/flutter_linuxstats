@@ -27,7 +27,6 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
         onRefresh: _refresh,
         child: ListView(
           primary: true,
-          shrinkWrap: true,
           children: [
             Center(
               child: Text(
@@ -38,6 +37,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
               ),
             ),
             GridView.count(
+              physics: ScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: ScreenManager.getWidgetCountLine(context),
               children: <Widget>[

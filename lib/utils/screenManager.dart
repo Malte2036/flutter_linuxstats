@@ -14,7 +14,7 @@ class ScreenManager {
 
   static int getWidgetCountLine(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    print("Screen Width: " + screenSize.width.toString());
+    //print("Screen Width: " + screenSize.width.toString());
     if (screenSize.height > screenSize.width) {
       if (screenSize.width >= 500)
         return 2;
