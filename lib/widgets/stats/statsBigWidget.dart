@@ -21,6 +21,7 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      elevation: 2.0,
       child: SingleChildScrollView(
         primary: false,
         physics: const NeverScrollableScrollPhysics(),
@@ -62,7 +63,7 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
                           ),
                         ),
                       ),
-                      Expanded(flex: 25, child: Container()),
+                      Expanded(flex: 15, child: Container()),
                     ],
                   ),
                 ],

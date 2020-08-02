@@ -8,13 +8,14 @@ class OwnTheme with ChangeNotifier {
   static final ThemeData lightTheme = ThemeData(
     fontFamily: 'RobotoMono',
     brightness: Brightness.light,
-    cardColor: Color.fromRGBO(0, 0, 0, 0.25),
+    cardColor: Color.fromRGBO(255, 255, 255, 0.25),
+    accentColor: OwnColors.greenColor,
   );
 
   static final ThemeData darkTheme = ThemeData(
     fontFamily: 'RobotoMono',
     brightness: Brightness.dark,
-    cardColor: Color.fromRGBO(255, 255, 255, 0.25),
+    cardColor: Color.fromRGBO(0, 0, 0, 0.25),
     accentColor: OwnColors.greenColor,
   );
 

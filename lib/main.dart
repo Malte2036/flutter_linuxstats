@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_linuxstats/screens/statsMainScreen.dart';
 import 'package:flutter_linuxstats/utils/ownTheme.dart';
 
 void main() {
-  //WidgetsFlutterBinding.ensureInitialized();
-  //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
   runApp(MyApp());
 }
 

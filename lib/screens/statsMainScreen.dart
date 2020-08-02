@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linuxstats/data/computerData.dart';
 import 'package:flutter_linuxstats/utils/ownColors.dart';
+import 'package:flutter_linuxstats/utils/ownTheme.dart';
 import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsBigWidget.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsSystemWidget.dart';
@@ -15,6 +16,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
       new GlobalKey<RefreshIndicatorState>();
   Future<Null> _refresh() async {
     print("call _refresh()");
+    OwnTheme.switchTheme();
     setState(() {});
   }
 

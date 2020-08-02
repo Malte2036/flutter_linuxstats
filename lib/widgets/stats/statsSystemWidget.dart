@@ -27,6 +27,7 @@ class _StatsSystemWidgetState extends State<StatsSystemWidget> {
 
     return Card(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      elevation: 2.0,
       child: SingleChildScrollView(
         primary: false,
         physics: const NeverScrollableScrollPhysics(),
