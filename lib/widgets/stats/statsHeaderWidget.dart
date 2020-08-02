@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_linuxstats/utils/ownColors.dart';
 
 class StatsHeaderWidget extends StatelessWidget {
   final String typeString;
@@ -19,7 +18,6 @@ class StatsHeaderWidget extends StatelessWidget {
                 child: Text(
                   typeString,
                   style: TextStyle(
-                    color: OwnColors.mainColor50,
                     fontSize: 25,
                   ),
                 ),

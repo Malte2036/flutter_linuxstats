@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linuxstats/data/computerData.dart';
-import 'package:flutter_linuxstats/utils/ownColors.dart';
+import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsHeaderWidget.dart';
 
 class StatsSystemWidget extends StatefulWidget {
@@ -25,41 +25,43 @@ class _StatsSystemWidgetState extends State<StatsSystemWidget> {
 
     List<String> systemDataPrintList = updateSystemDataPrintList();
 
-    return Container(
-      decoration: new BoxDecoration(
-        color: OwnColors.grayColor,
-        borderRadius: new BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Column(
-        children: <Widget>[
-          StatsHeaderWidget(typeString: "SYSTEM"),
-          Padding(padding: EdgeInsets.all(7.5)),
-          Row(
-            children: <Widget>[
-              Expanded(flex: 10, child: Container()),
-              Expanded(
-                flex: 90,
-                child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: systemDataPrintList.length * 2,
-                  itemBuilder: (context, index) {
-                    if (index % 2 == 0) {
-                      return Text(systemDataPrintList[index ~/ 2],
-                          style: TextStyle(
-                            color: OwnColors.mainColor50,
-                            fontSize: 12.5,
-                          ));
-                    } else {
-                      return Padding(padding: EdgeInsets.all(7));
-                    }
-                  },
+    return Card(
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      child: SingleChildScrollView(
+        primary: false,
+        physics: const NeverScrollableScrollPhysics(),
+        child: Column(
+          children: <Widget>[
+            StatsHeaderWidget(typeString: "SYSTEM"),
+            Padding(padding: EdgeInsets.all(5)),
+            Row(
+              children: <Widget>[
+                Expanded(flex: 10, child: Container()),
+                Expanded(
+                  flex: 85,
+                  child: ListView.builder(
+                    primary: false,
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: systemDataPrintList.length * 2,
+                    itemBuilder: (context, index) {
+                      if (index % 2 == 0) {
+                        return Text(systemDataPrintList[index ~/ 2],
+                            style: TextStyle(
+                              fontSize: ScreenManager.getFontSizeSmall(context),
+                            ));
+                      } else {
+                        return Padding(padding: EdgeInsets.all(3.5));
+                      }
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Padding(padding: EdgeInsets.all(7.5)),
-        ],
+                Expanded(flex: 5, child: Container()),
+              ],
+            ),
+            Padding(padding: EdgeInsets.all(7.5)),
+          ],
+        ),
       ),
     );
   }

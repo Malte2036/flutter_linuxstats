@@ -9,11 +9,12 @@ class HalfGaugeChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
   double percent = 1.0;
+  int arcWidth = 20;
 
   HalfGaugeChart(this.seriesList, {this.animate, this.percent});
 
   factory HalfGaugeChart.fromPercent(double percent, Color color,
-      {bool animate}) {
+      {bool animate, int arcWidth}) {
     return new HalfGaugeChart(
       _createPercentData(percent, color),
       percent: percent,
@@ -25,11 +26,8 @@ class HalfGaugeChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return new charts.PieChart(seriesList,
         animate: animate,
-        // Configure the width of the pie slices to 30px. The remaining space in
-        // the chart will be left as a hole in the center. Adjust the start
-        // angle and the arc length of the pie so it resembles a gauge.
         defaultRenderer: new charts.ArcRendererConfig(
-            arcWidth: 20, startAngle: pi, arcLength: percent * pi));
+            arcWidth: arcWidth, startAngle: pi, arcLength: percent * pi));
   }
 
   static List<charts.Series<GaugeSegment, String>> _createPercentData(

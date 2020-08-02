@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_linuxstats/data/computerData.dart';
 import 'package:flutter_linuxstats/screens/statsMainScreen.dart';
-import 'package:flutter_linuxstats/utils/ownColors.dart';
+import 'package:flutter_linuxstats/utils/ownTheme.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  //WidgetsFlutterBinding.ensureInitialized();
+  //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    OwnTheme.currentOwnTheme.addListener(() {
+      print("Changes");
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Linux Stats',
-      color: OwnColors.mainColor,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'RobotoMono'),
+      theme: OwnTheme.lightTheme,
+      darkTheme: OwnTheme.darkTheme,
+      themeMode: OwnTheme.getCurrentThemeMode(),
       home: StatsMainScreen(),
     );
   }
