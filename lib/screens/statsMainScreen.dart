@@ -16,7 +16,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
       new GlobalKey<RefreshIndicatorState>();
   Future<Null> _refresh() async {
     print("call _refresh()");
-    OwnTheme.switchTheme();
+    //OwnTheme.switchTheme();
     setState(() {});
   }
 
