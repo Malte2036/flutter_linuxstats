@@ -5,6 +5,7 @@ import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownTheme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   WebsocketCommunication.currentWebsocketCommunication =
       new WebsocketCommunication();
   WebsocketCommunication.currentWebsocketCommunication.connect();

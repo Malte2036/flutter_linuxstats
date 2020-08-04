@@ -130,6 +130,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  ping_discover_network:
+    dependency: "direct main"
+    description:
+      name: ping_discover_network
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -198,5 +205,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  wifi:
+    dependency: "direct main"
+    description:
+      name: wifi
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.5"
 sdks:
   dart: ">=2.10.0-0.0.dev <2.10.0"
+  flutter: ">=0.1.4 <2.0.0"
