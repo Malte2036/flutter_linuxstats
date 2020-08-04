@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_linuxstats/data/computerData.dart';
 import 'package:web_socket_channel/io.dart';
@@ -41,6 +42,8 @@ class WebsocketCommunication {
   }
 
   static Future<String> getIPString(int port) async {
+    if (Platform.isLinux) return "0.0.0.0";
+
     String ip = await Wifi.ip;
     String subnet = ip.substring(0, ip.lastIndexOf('.'));
 
