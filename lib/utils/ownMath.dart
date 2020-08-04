@@ -35,4 +35,27 @@ class OwnMath {
   static double round(double d, {int length = 1}) {
     return double.parse(d.toStringAsFixed(length));
   }
+
+  static String secondsToHumanString(double microseconds) {
+    int ms = microseconds.toInt();
+    List<int> allTimeSize = [86400, 3600, 60];
+    List<String> allTimeSizeString = ["days", "hours", "minutes"];
+
+    String humanTimeString = ""; //"5 hours, 1 min";
+    for (int i = 0; i < allTimeSize.length; i++) {
+      int timeSize = allTimeSize[i];
+      int count = (ms / timeSize).toInt();
+
+      if (count != 0) {
+        String timeSizeString = allTimeSizeString[i];
+        if (count == 1)
+          timeSizeString =
+              timeSizeString.substring(0, timeSizeString.length - 1);
+
+        humanTimeString += count.toString() + " " + timeSizeString + ", ";
+        ms -= (count * timeSize);
+      }
+    }
+    return humanTimeString.substring(0, humanTimeString.length - 2);
+  }
 }

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_linuxstats/communication/websocketCommunication.dart';
 import 'package:flutter_linuxstats/screens/statsMainScreen.dart';
+import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownTheme.dart';
 
 void main() {
+  WebsocketCommunication.currentWebsocketCommunication =
+      new WebsocketCommunication();
+  WebsocketCommunication.currentWebsocketCommunication.connect();
   runApp(MyApp());
 }
 
@@ -23,13 +28,21 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    Helper.currentStatsMainScreen = new StatsMainScreen();
     return MaterialApp(
       title: 'Linux Stats',
       debugShowCheckedModeBanner: false,
       theme: OwnTheme.lightTheme,
       darkTheme: OwnTheme.darkTheme,
       themeMode: OwnTheme.getCurrentThemeMode(),
-      home: StatsMainScreen(),
+      home: Helper.currentStatsMainScreen,
     );
+  }
+
+  @override
+  void dispose() {
+    WebsocketCommunication.currentWebsocketCommunication.channel.sink.close();
+    WebsocketCommunication.currentWebsocketCommunication.timer?.cancel();
+    super.dispose();
   }
 }

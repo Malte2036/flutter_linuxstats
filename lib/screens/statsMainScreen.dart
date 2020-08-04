@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_linuxstats/communication/websocketCommunication.dart';
 import 'package:flutter_linuxstats/data/computerData.dart';
 import 'package:flutter_linuxstats/utils/ownColors.dart';
-import 'package:flutter_linuxstats/utils/ownTheme.dart';
 import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsBigWidget.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsSystemWidget.dart';
 
 class StatsMainScreen extends StatefulWidget {
+  _StatsMainScreenState currentStatsMainScreenState =
+      new _StatsMainScreenState();
+
   @override
-  _StatsMainScreenState createState() => _StatsMainScreenState();
+  _StatsMainScreenState createState() => currentStatsMainScreenState;
+
+  Future<Null> refresh() async {
+    currentStatsMainScreenState._refresh();
+  }
 }
 
 class _StatsMainScreenState extends State<StatsMainScreen> {
@@ -16,8 +23,11 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
       new GlobalKey<RefreshIndicatorState>();
   Future<Null> _refresh() async {
     print("call _refresh()");
-    //OwnTheme.switchTheme();
     setState(() {});
+  }
+
+  Future<Null> _manuelRefresh() async {
+    WebsocketCommunication.askForSystemData();
   }
 
   @override
@@ -26,13 +36,15 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
       resizeToAvoidBottomInset: false,
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
-        onRefresh: _refresh,
+        onRefresh: _manuelRefresh,
         child: ListView(
           primary: true,
           children: [
             Center(
               child: Text(
-                "malte@ArchLinux",
+                ComputerData.currentComputerData.username +
+                    "@" +
+                    ComputerData.currentComputerData.hostname,
                 style: TextStyle(
                   fontSize: ScreenManager.getFontSize(context),
                 ),
