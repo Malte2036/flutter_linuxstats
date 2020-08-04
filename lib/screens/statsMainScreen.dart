@@ -59,19 +59,29 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
                     "CPU",
                     ComputerData.currentComputerData.getCPUPercentString(),
                     ComputerData.currentComputerData.cpuPercent,
-                    OwnColors.greenColor),
+                    OwnColors.percentToColor(
+                        ComputerData.currentComputerData.cpuPercent)),
                 StatsBigWidget(
                     "MEMORY",
                     ComputerData.currentComputerData
                         .getVirtualMemoryCompareString(),
                     ComputerData.currentComputerData.getVirtualMemoryPercent(),
-                    OwnColors.orangeColor),
+                    OwnColors.percentToColor(ComputerData.currentComputerData
+                        .getVirtualMemoryPercent())),
                 StatsBigWidget(
                     "DISK",
                     ComputerData.currentComputerData
                         .getDiskUsageCompareString(),
                     ComputerData.currentComputerData.getDiskUsagePercent(),
-                    OwnColors.redColor),
+                    OwnColors.percentToColor(ComputerData.currentComputerData
+                        .getDiskUsagePercent())),
+                StatsBigWidget(
+                    "TEMPERATUR",
+                    ComputerData.currentComputerData
+                        .getTemperaturCompareString(),
+                    ComputerData.currentComputerData.getTemperaturPercent(),
+                    OwnColors.percentToColor(ComputerData.currentComputerData
+                        .getTemperaturPercent())),
                 StatsSystemWidget(),
               ],
             ),

@@ -23,6 +23,9 @@ def getData():
             'virtualMemoryUsed': getattr(psutil.virtual_memory(), 'used'),
             
             'diskUsageTotal': getattr(psutil.disk_usage("/"), 'total'),
-            'diskUsageUsed': getattr(psutil.disk_usage("/"), 'used')
+            'diskUsageUsed': getattr(psutil.disk_usage("/"), 'used'),
+
+            'temperaturCurrent': getattr(psutil.sensors_temperatures()['acpitz'][0], 'current'),
+            'temperaturHigh': getattr(psutil.sensors_temperatures()['acpitz'][0], 'high')
         }
     )

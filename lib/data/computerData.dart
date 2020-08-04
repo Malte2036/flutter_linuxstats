@@ -20,6 +20,9 @@ class ComputerData {
   final int diskUsageTotal;
   final int diskUsageUsed;
 
+  final double temperaturCurrent;
+  final double temperaturHigh;
+
   ComputerData({
     this.username,
     this.hostname,
@@ -33,24 +36,9 @@ class ComputerData {
     this.virtualMemoryUsed,
     this.diskUsageTotal,
     this.diskUsageUsed,
+    this.temperaturCurrent,
+    this.temperaturHigh,
   });
-
-  factory ComputerData.exampleData() {
-    return ComputerData(
-      username: "malte",
-      hostname: "ArchLinux",
-      os: "Arch Linux x86_64",
-      kernel: "5.4.50-1-lts",
-      uptime: 5000000,
-      cpu: "Intel Pentium N3710 (4) @ 2.560GH",
-      gpu: "Intel Atom/Celeron/Pentium Proces",
-      cpuPercent: 0.76,
-      virtualMemoryTotal: 8186245120,
-      virtualMemoryUsed: 3932812319,
-      diskUsageTotal: 21378641920,
-      diskUsageUsed: 17000000000,
-    );
-  }
 
   factory ComputerData.emptyData() {
     return ComputerData(
@@ -66,6 +54,8 @@ class ComputerData {
       virtualMemoryUsed: 0,
       diskUsageTotal: 0,
       diskUsageUsed: 0,
+      temperaturCurrent: 0,
+      temperaturHigh: 0,
     );
   }
 
@@ -83,6 +73,8 @@ class ComputerData {
       virtualMemoryUsed: json['virtualMemoryUsed'],
       diskUsageTotal: json['diskUsageTotal'],
       diskUsageUsed: json['diskUsageUsed'],
+      temperaturCurrent: json['temperaturCurrent'],
+      temperaturHigh: json['temperaturHigh'],
     );
   }
 
@@ -136,5 +128,18 @@ class ComputerData {
 
   double getDiskUsagePercent() {
     return OwnMath.round(diskUsageUsed / diskUsageTotal);
+  }
+
+  //Temperatur
+  String getTemperaturCompareString() {
+    if (temperaturCurrent == 0) return "";
+    return OwnMath.round(temperaturCurrent).toString() +
+        "/" +
+        OwnMath.round(temperaturHigh).toString() +
+        "°";
+  }
+
+  double getTemperaturPercent() {
+    return OwnMath.round(temperaturCurrent / temperaturHigh);
   }
 }
