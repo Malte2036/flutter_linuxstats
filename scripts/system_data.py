@@ -5,6 +5,7 @@ import json
 
 username = os.getlogin()
 hostname = getattr(os.uname(), 'nodename')
+sysname = getattr(os.uname(), 'sysname')
 machine = getattr(os.uname(), 'machine')
 kernel = getattr(os.uname(), 'release')
 boottime = psutil.boot_time()
@@ -14,6 +15,8 @@ def getData():
         {
             'username': username,
             'hostname': hostname,
+            'sysname': sysname,
+            'machine': machine,
             'kernel': kernel,
             'uptime': time.time() - boottime,
             

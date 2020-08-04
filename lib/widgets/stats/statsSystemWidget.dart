@@ -15,7 +15,7 @@ class _StatsSystemWidgetState extends State<StatsSystemWidget> {
       ComputerData computerData = ComputerData.currentComputerData;
       return [
         "Hostname: " + computerData.hostname,
-        "OS: " + computerData.os,
+        "OS: " + computerData.sysname + " " + computerData.machine,
         "Kernel: " + computerData.kernel,
         "Uptime: " + computerData.getUptimeString(),
         "CPU: " + computerData.cpu,

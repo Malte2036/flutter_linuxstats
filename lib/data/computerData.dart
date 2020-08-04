@@ -8,7 +8,8 @@ class ComputerData {
 
   final String username;
   final String hostname;
-  final String os;
+  final String sysname;
+  final String machine;
   final String kernel;
   final double uptime;
   final String cpu;
@@ -28,7 +29,8 @@ class ComputerData {
   ComputerData({
     this.username,
     this.hostname,
-    this.os,
+    this.sysname,
+    this.machine,
     this.kernel,
     this.uptime,
     this.cpu,
@@ -46,7 +48,8 @@ class ComputerData {
     return ComputerData(
       username: "",
       hostname: "",
-      os: "",
+      sysname: "",
+      machine: "",
       kernel: "",
       uptime: 0,
       cpu: "",
@@ -65,7 +68,8 @@ class ComputerData {
     return ComputerData(
       username: json['username'].toString(),
       hostname: json['hostname'].toString(),
-      os: json['os'].toString(),
+      sysname: json['sysname'].toString(),
+      machine: json['machine'].toString(),
       kernel: json['kernel'].toString(),
       uptime: json['uptime'],
       cpu: json['cpu'].toString(),
