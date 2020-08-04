@@ -22,6 +22,8 @@ def getData():
             
             'cpuPercent': psutil.cpu_percent(),
             
+            'batteryPercent': getattr(psutil.sensors_battery(), 'percent'),
+            
             'virtualMemoryTotal': getattr(psutil.virtual_memory(), 'total'),
             'virtualMemoryUsed': getattr(psutil.virtual_memory(), 'used'),
             

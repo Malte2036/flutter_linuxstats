@@ -17,6 +17,8 @@ class ComputerData {
 
   final double cpuPercent;
 
+  final double batteryPercent;
+
   final int virtualMemoryTotal;
   final int virtualMemoryUsed;
 
@@ -36,6 +38,7 @@ class ComputerData {
     this.cpu,
     this.gpu,
     this.cpuPercent,
+    this.batteryPercent,
     this.virtualMemoryTotal,
     this.virtualMemoryUsed,
     this.diskUsageTotal,
@@ -55,6 +58,7 @@ class ComputerData {
       cpu: "",
       gpu: "",
       cpuPercent: 0,
+      batteryPercent: 0,
       virtualMemoryTotal: 0,
       virtualMemoryUsed: 0,
       diskUsageTotal: 0,
@@ -75,6 +79,7 @@ class ComputerData {
       cpu: json['cpu'].toString(),
       gpu: json['gpu'].toString(),
       cpuPercent: json['cpuPercent'] / 100.0,
+      batteryPercent: json['batteryPercent'] / 100.0,
       virtualMemoryTotal: json['virtualMemoryTotal'],
       virtualMemoryUsed: json['virtualMemoryUsed'],
       diskUsageTotal: json['diskUsageTotal'],
@@ -99,6 +104,12 @@ class ComputerData {
   String getCPUPercentString() {
     if (cpuPercent == 0) return "";
     return OwnMath.round(cpuPercent * 100).toString() + "%";
+  }
+
+  //Battery
+  String getBatteryPercentString() {
+    if (batteryPercent == 0) return "";
+    return OwnMath.round(batteryPercent * 100).toString() + "%";
   }
 
   //VirtualMemory
