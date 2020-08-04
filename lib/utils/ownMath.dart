@@ -36,15 +36,14 @@ class OwnMath {
     return double.parse(d.toStringAsFixed(length));
   }
 
-  static String secondsToHumanString(double microseconds) {
-    int ms = microseconds.toInt();
+  static String secondsToHumanString(int ms) {
     List<int> allTimeSize = [86400, 3600, 60];
     List<String> allTimeSizeString = ["days", "hours", "minutes"];
 
     String humanTimeString = ""; //"5 hours, 1 min";
     for (int i = 0; i < allTimeSize.length; i++) {
       int timeSize = allTimeSize[i];
-      int count = (ms / timeSize).toInt();
+      int count = ms ~/ timeSize;
 
       if (count != 0) {
         String timeSizeString = allTimeSizeString[i];

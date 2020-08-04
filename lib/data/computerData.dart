@@ -4,6 +4,8 @@ import 'package:flutter_linuxstats/utils/ownMath.dart';
 class ComputerData {
   static ComputerData currentComputerData = ComputerData.emptyData();
 
+  final DateTime updated = DateTime.now();
+
   final String username;
   final String hostname;
   final String os;
@@ -86,7 +88,7 @@ class ComputerData {
   //Uptime
   String getUptimeString() {
     if (uptime == 0) return "";
-    return OwnMath.secondsToHumanString(uptime);
+    return OwnMath.secondsToHumanString(uptime.toInt());
   }
 
   //CPU

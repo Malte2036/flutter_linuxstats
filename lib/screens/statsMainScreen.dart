@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_linuxstats/communication/websocketCommunication.dart';
 import 'package:flutter_linuxstats/data/computerData.dart';
 import 'package:flutter_linuxstats/utils/ownColors.dart';
+import 'package:flutter_linuxstats/utils/ownMath.dart';
 import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsBigWidget.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsSystemWidget.dart';
+import 'package:intl/intl.dart';
 
 class StatsMainScreen extends StatefulWidget {
   _StatsMainScreenState currentStatsMainScreenState =
@@ -84,6 +86,13 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
                         .getTemperaturPercent())),
                 StatsSystemWidget(),
               ],
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text("updated " +
+                  new DateFormat("HH:mm:ss")
+                      .format(ComputerData.currentComputerData.updated) +
+                  "  "),
             ),
           ],
         ),
