@@ -28,6 +28,9 @@ class WebsocketCommunication {
         ComputerData computerData = ComputerData.fromJson(json.decode(data));
         ComputerData.setCurrentComputerData(computerData);
       },
+      onDone: () {
+        connect();
+      },
     );
     timer =
         Timer.periodic(Duration(seconds: 30), (Timer t) => askForSystemData());
