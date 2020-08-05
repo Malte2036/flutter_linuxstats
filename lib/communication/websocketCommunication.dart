@@ -40,18 +40,19 @@ class WebsocketCommunication {
     askForSystemData();
 
     Stream stream = channel.stream.asBroadcastStream();
-    stream.listen(
-      (data) {
-        print('got data: ' + data.toString());
-        ComputerData computerData = ComputerData.fromJson(json.decode(data));
-        ComputerData.setCurrentComputerData(computerData);
-      },
-      onDone: () {
-        communicationState = CommunicationState.DISCONNECTED;
-        ComputerData.setCurrentComputerData(ComputerData.emptyData());
-        Helper.currentStatsMainScreen.showConnectionRefusedDialog();
-      },
-    );
+    stream.listen((data) {
+      print('got data: ' + data.toString());
+      ComputerData computerData = ComputerData.fromJson(json.decode(data));
+      ComputerData.setCurrentComputerData(computerData);
+    }, onDone: () {
+      communicationState = CommunicationState.DISCONNECTED;
+      ComputerData.setCurrentComputerData(ComputerData.emptyData());
+      Helper.currentStatsMainScreen.showConnectionRefusedDialog();
+    }, onError: (e) {
+      communicationState = CommunicationState.DISCONNECTED;
+      ComputerData.setCurrentComputerData(ComputerData.emptyData());
+      Helper.currentStatsMainScreen.showConnectionRefusedDialog();
+    }, cancelOnError: true);
 
     timer =
         Timer.periodic(Duration(seconds: 30), (Timer t) => askForSystemData());
