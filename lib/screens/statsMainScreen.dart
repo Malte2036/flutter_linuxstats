@@ -44,12 +44,19 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
         ),
         centerTitle: true,
         actions: <Widget>[
-          Icon(
-            Icons.power_settings_new,
-            color: WebsocketCommunication.communicationState ==
+          Tooltip(
+            message: WebsocketCommunication.communicationState ==
                     CommunicationState.CONNECTED
-                ? OwnColors.greenColor
-                : OwnColors.redColor,
+                ? "CONNECTED"
+                : "DISCONNECTED",
+            waitDuration: Duration(microseconds: 1),
+            child: Icon(
+              Icons.power_settings_new,
+              color: WebsocketCommunication.communicationState ==
+                      CommunicationState.CONNECTED
+                  ? OwnColors.greenColor
+                  : OwnColors.redColor,
+            ),
           ),
           Padding(padding: EdgeInsets.only(right: 20)),
         ],
