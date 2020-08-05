@@ -61,6 +61,9 @@ class WebsocketCommunication {
     if (currentWebsocketCommunication == null ||
         currentWebsocketCommunication.channel == null)
       currentWebsocketCommunication = new WebsocketCommunication();
+    else if (WebsocketCommunication.communicationState ==
+        CommunicationState.DISCONNECTED)
+      currentWebsocketCommunication.connect();
     else
       currentWebsocketCommunication.channel.sink.add("getSystemData()");
   }

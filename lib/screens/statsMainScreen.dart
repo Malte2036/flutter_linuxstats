@@ -33,8 +33,6 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
   }
 
   Future<Null> _manuelRefresh() async {
-    if (WebsocketCommunication.communicationState ==
-        CommunicationState.DISCONNECTED) _showConnectionRefusedDialog();
     WebsocketCommunication.askForSystemData();
   }
 
