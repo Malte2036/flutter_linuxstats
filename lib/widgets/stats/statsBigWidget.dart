@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownTheme.dart';
 import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/charts/halfGaugeChart.dart';
@@ -19,12 +20,24 @@ class StatsBigWidget extends StatefulWidget {
 }
 
 class _StatsBigWidgetState extends State<StatsBigWidget> {
+  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+
+  @override
+  void initState() {
+    Helper.addAllStatsBigWidgetFlipKey(widget.typeString, cardKey);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: FlipCard(
         flipOnTouch: true,
+        onFlip: () {
+          Helper.flipAllStatsBigWidgetsBack(except: widget.typeString);
+        },
+        key: cardKey,
         front: IgnorePointer(
           ignoring: true,
           child: Card(
