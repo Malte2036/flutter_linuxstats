@@ -311,7 +311,7 @@ class ComputerData {
 
   String getSwapMemoryPercentString() {
     double percent = getSwapMemoryPercent();
-    if (percent == 0 && swapMemoryUsed == 0) return "";
+    if (percent == 0 && swapMemoryTotal == 0) return "";
     return OwnMath.round(percent * 100).toString() + "%";
   }
 

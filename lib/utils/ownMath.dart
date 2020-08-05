@@ -16,7 +16,7 @@ class OwnMath {
         return round(bytes / sizeType).toString() + _byteString[i];
       }
     }
-    return "";
+    return "0B";
   }
 
   static String bytesToHumanCompareString(int smallByte, int bigByte) {
