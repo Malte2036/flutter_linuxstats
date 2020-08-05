@@ -37,6 +37,7 @@ class ComputerData {
 
   final int diskUsageTotal;
   final int diskUsageUsed;
+  final int diskUsageFree;
 
   final double temperatureCurrent;
   final double temperatureHigh;
@@ -69,6 +70,7 @@ class ComputerData {
       this.swapMemoryFree,
       this.diskUsageTotal,
       this.diskUsageUsed,
+      this.diskUsageFree,
       this.temperatureCurrent,
       this.temperatureHigh,
       this.temperatureCritical});
@@ -101,6 +103,7 @@ class ComputerData {
       swapMemoryFree: 0,
       diskUsageTotal: 0,
       diskUsageUsed: 0,
+      diskUsageFree: 0,
       temperatureCurrent: 0,
       temperatureHigh: 0,
       temperatureCritical: 0,
@@ -135,6 +138,7 @@ class ComputerData {
       swapMemoryFree: json['swapMemoryFree'],
       diskUsageTotal: json['diskUsageTotal'],
       diskUsageUsed: json['diskUsageUsed'],
+      diskUsageFree: json['diskUsageFree'],
       temperatureCurrent: json['temperatureCurrent'],
       temperatureHigh: json['temperatureHigh'],
       temperatureCritical: json['temperatureCritical'],
@@ -176,6 +180,7 @@ class ComputerData {
         return [
           "Total: " + getDiskUsageTotalString(),
           "Used: " + getDiskUsageUsedString(),
+          "Free: " + getDiskUsageFreeString(),
           "Percent: " + getDiskUsagePercentString(),
         ];
       case "TEMPERATURE":
@@ -322,6 +327,10 @@ class ComputerData {
 
   String getDiskUsageUsedString() {
     return OwnMath.bytesToHumanString(diskUsageUsed);
+  }
+
+  String getDiskUsageFreeString() {
+    return OwnMath.bytesToHumanString(diskUsageFree);
   }
 
   String getDiskUsageCompareString() {

@@ -53,6 +53,7 @@ def getData():
             
             'diskUsageTotal': getattr(psutil.disk_usage("/"), 'total'),
             'diskUsageUsed': getattr(psutil.disk_usage("/"), 'used'),
+            'diskUsageFree': getattr(psutil.disk_usage("/"), 'free'),
 
             'temperatureCurrent': getattr(psutil.sensors_temperatures()['acpitz'][0], 'current'),
             'temperatureHigh': temperatureHigh,
