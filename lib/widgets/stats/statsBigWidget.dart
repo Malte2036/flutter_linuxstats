@@ -3,6 +3,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter_linuxstats/utils/ownTheme.dart';
 import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/charts/halfGaugeChart.dart';
+import 'package:flutter_linuxstats/widgets/stats/statsDetailWidget.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsHeaderWidget.dart';
 
 class StatsBigWidget extends StatefulWidget {
@@ -84,7 +85,10 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
             ),
           ),
         ),
-        back: Card(),
+        back: IgnorePointer(
+          ignoring: true,
+          child: StatsDetailWidget(widget.typeString),
+        ),
       ),
     );
   }

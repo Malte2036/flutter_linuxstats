@@ -6,7 +6,7 @@ import 'package:flutter_linuxstats/utils/ownColors.dart';
 import 'package:flutter_linuxstats/utils/ownMath.dart';
 import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsBigWidget.dart';
-import 'package:flutter_linuxstats/widgets/stats/statsSystemWidget.dart';
+import 'package:flutter_linuxstats/widgets/stats/statsDetailWidget.dart';
 import 'package:intl/intl.dart';
 
 class StatsMainScreen extends StatefulWidget {
@@ -87,6 +87,13 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
                     OwnColors.percentToColor(ComputerData.currentComputerData
                         .getVirtualMemoryPercent())),
                 StatsBigWidget(
+                    "SWAP",
+                    ComputerData.currentComputerData
+                        .getSwapMemoryCompareString(),
+                    ComputerData.currentComputerData.getSwapMemoryPercent(),
+                    OwnColors.percentToColor(ComputerData.currentComputerData
+                        .getSwapMemoryPercent())),
+                StatsBigWidget(
                     "DISK",
                     ComputerData.currentComputerData
                         .getDiskUsageCompareString(),
@@ -107,7 +114,9 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
                     OwnColors.percentToColor(
                         ComputerData.currentComputerData.batteryPercent,
                         inverted: true)),
-                StatsSystemWidget(),
+                Container(
+                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                    child: StatsDetailWidget("SYSTEM")),
               ],
             ),
             Align(

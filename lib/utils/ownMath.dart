@@ -37,6 +37,8 @@ class OwnMath {
   }
 
   static String secondsToHumanString(int ms) {
+    if (ms <= 0) return "";
+
     List<int> allTimeSize = [86400, 3600, 60];
     List<String> allTimeSizeString = ["days", "hours", "minutes"];
 
