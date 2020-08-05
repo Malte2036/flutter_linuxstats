@@ -40,6 +40,7 @@ class WebsocketCommunication {
       },
       onDone: () {
         communicationState = CommunicationState.DISCONNECTED;
+        ComputerData.setCurrentComputerData(ComputerData.emptyData());
         connect();
       },
     );
