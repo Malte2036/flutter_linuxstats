@@ -3,7 +3,6 @@ import 'package:flutter_linuxstats/communication/communicationState.dart';
 import 'package:flutter_linuxstats/communication/websocketCommunication.dart';
 import 'package:flutter_linuxstats/data/computerData.dart';
 import 'package:flutter_linuxstats/utils/ownColors.dart';
-import 'package:flutter_linuxstats/utils/ownMath.dart';
 import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsBigWidget.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsDetailWidget.dart';
@@ -16,8 +15,12 @@ class StatsMainScreen extends StatefulWidget {
   @override
   _StatsMainScreenState createState() => currentStatsMainScreenState;
 
-  Future<Null> refresh() async {
+  void refresh() {
     currentStatsMainScreenState._refresh();
+  }
+
+  void showConnectionRefusedDialog() {
+    currentStatsMainScreenState._showConnectionRefusedDialog();
   }
 }
 
@@ -30,7 +33,35 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
   }
 
   Future<Null> _manuelRefresh() async {
+    if (WebsocketCommunication.communicationState ==
+        CommunicationState.DISCONNECTED) _showConnectionRefusedDialog();
     WebsocketCommunication.askForSystemData();
+  }
+
+  _showConnectionRefusedDialog() {
+    showDialog(
+        context: context,
+        builder: (_) => new AlertDialog(
+              title: new Text("Connection refused"),
+              content: new Text(
+                  "Unfortunately, no running Linux server was found..."),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Close me'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                FlatButton(
+                  child: Text('Reconnect!'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    WebsocketCommunication.currentWebsocketCommunication
+                        .connect();
+                  },
+                )
+              ],
+            ));
   }
 
   @override

@@ -26,7 +26,7 @@ class ScreenManager {
       if (screenSize.width >= 2400) return 6;
       if (screenSize.width >= 1700) return 5;
       if (screenSize.width >= 1000) return 4;
-      if (screenSize.width >= 700) return 3;
+      if (screenSize.width >= 800) return 3;
       return 2;
     }
   }

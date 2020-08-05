@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
+import 'package:flutter_linuxstats/communication/communicationState.dart';
+import 'package:flutter_linuxstats/communication/websocketCommunication.dart';
 import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownTheme.dart';
 import 'package:flutter_linuxstats/utils/screenManager.dart';
@@ -33,7 +35,8 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: FlipCard(
-        flipOnTouch: true,
+        flipOnTouch: WebsocketCommunication.communicationState ==
+            CommunicationState.CONNECTED,
         onFlip: () {
           Helper.flipAllStatsBigWidgetsBack(except: widget.typeString);
         },

@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter_linuxstats/communication/communicationState.dart';
 import 'package:flutter_linuxstats/data/computerData.dart';
+import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:wifi/wifi.dart';
 import 'package:ping_discover_network/ping_discover_network.dart';
@@ -22,7 +23,14 @@ class WebsocketCommunication {
   }
 
   void connect() async {
-    String url = "ws://" + (await getIPString(port)) + ":" + port.toString();
+    String ipString = await getIPString(port);
+    if (ipString.length == 0) {
+      communicationState = CommunicationState.DISCONNECTED;
+      ComputerData.setCurrentComputerData(ComputerData.emptyData());
+      Helper.currentStatsMainScreen.showConnectionRefusedDialog();
+      return;
+    }
+    String url = "ws://" + ipString + ":" + port.toString();
     print("Connecting to " + url + "...");
     channel = IOWebSocketChannel.connect(url);
     print("Connected!");
@@ -41,7 +49,7 @@ class WebsocketCommunication {
       onDone: () {
         communicationState = CommunicationState.DISCONNECTED;
         ComputerData.setCurrentComputerData(ComputerData.emptyData());
-        connect();
+        Helper.currentStatsMainScreen.showConnectionRefusedDialog();
       },
     );
 
@@ -70,6 +78,6 @@ class WebsocketCommunication {
         return addr.ip.toString();
       }
     }
-    return getIPString(port);
+    return "";
   }
 }
