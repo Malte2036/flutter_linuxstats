@@ -4,3 +4,7 @@
 # Linux Stats App
 
 A flutter application to monitor your Linux PC statistic.
+
+# Screenshots
+
+![Screenshot1](screenshots/Screenshot1.png?raw=true)
