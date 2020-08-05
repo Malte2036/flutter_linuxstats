@@ -38,9 +38,9 @@ class ComputerData {
   final int diskUsageTotal;
   final int diskUsageUsed;
 
-  final double temperaturCurrent;
-  final double temperaturHigh;
-  final double temperaturCritical;
+  final double temperatureCurrent;
+  final double temperatureHigh;
+  final double temperatureCritical;
 
   ComputerData(
       {this.username,
@@ -69,9 +69,9 @@ class ComputerData {
       this.swapMemoryFree,
       this.diskUsageTotal,
       this.diskUsageUsed,
-      this.temperaturCurrent,
-      this.temperaturHigh,
-      this.temperaturCritical});
+      this.temperatureCurrent,
+      this.temperatureHigh,
+      this.temperatureCritical});
 
   factory ComputerData.emptyData() {
     return ComputerData(
@@ -101,9 +101,9 @@ class ComputerData {
       swapMemoryFree: 0,
       diskUsageTotal: 0,
       diskUsageUsed: 0,
-      temperaturCurrent: 0,
-      temperaturHigh: 0,
-      temperaturCritical: 0,
+      temperatureCurrent: 0,
+      temperatureHigh: 0,
+      temperatureCritical: 0,
     );
   }
 
@@ -135,9 +135,9 @@ class ComputerData {
       swapMemoryFree: json['swapMemoryFree'],
       diskUsageTotal: json['diskUsageTotal'],
       diskUsageUsed: json['diskUsageUsed'],
-      temperaturCurrent: json['temperaturCurrent'],
-      temperaturHigh: json['temperaturHigh'],
-      temperaturCritical: json['temperaturCritical'],
+      temperatureCurrent: json['temperatureCurrent'],
+      temperatureHigh: json['temperatureHigh'],
+      temperatureCritical: json['temperatureCritical'],
     );
   }
 
@@ -178,11 +178,11 @@ class ComputerData {
           "Used: " + getDiskUsageUsedString(),
           "Percent: " + getDiskUsagePercentString(),
         ];
-      case "TEMPERATUR":
+      case "TEMPERATURE":
         return [
-          "Current: " + getTemperaturCurrentString(),
-          "High: " + getTemperaturHighString(),
-          "Critical: " + getTemperaturCriticalString(),
+          "Current: " + getTemperatureCurrentString(),
+          "High: " + getTemperatureHighString(),
+          "Critical: " + getTemperatureCriticalString(),
         ];
       case "BATTERY":
         return [
@@ -338,31 +338,31 @@ class ComputerData {
     return OwnMath.round(percent * 100).toString() + "%";
   }
 
-  //Temperatur
-  String getTemperaturCurrentString() {
-    if (temperaturCurrent == 0) return "";
-    return temperaturCurrent.toString() + "°";
+  //Temperature
+  String getTemperatureCurrentString() {
+    if (temperatureCurrent == 0) return "";
+    return temperatureCurrent.toString() + "°";
   }
 
-  String getTemperaturHighString() {
-    if (temperaturHigh == 0) return "";
-    return temperaturHigh.toString() + "°";
+  String getTemperatureHighString() {
+    if (temperatureHigh == 0) return "";
+    return temperatureHigh.toString() + "°";
   }
 
-  String getTemperaturCriticalString() {
-    if (temperaturCritical == 0) return "";
-    return temperaturCritical.toString() + "°";
+  String getTemperatureCriticalString() {
+    if (temperatureCritical == 0) return "";
+    return temperatureCritical.toString() + "°";
   }
 
-  String getTemperaturCompareString() {
-    if (temperaturCurrent == 0) return "";
-    return OwnMath.round(temperaturCurrent).toString() +
+  String getTemperatureCompareString() {
+    if (temperatureCurrent == 0) return "";
+    return OwnMath.round(temperatureCurrent).toString() +
         "/" +
-        OwnMath.round(temperaturHigh).toString() +
+        OwnMath.round(temperatureHigh).toString() +
         "°";
   }
 
-  double getTemperaturPercent() {
-    return OwnMath.round(temperaturCurrent / temperaturHigh);
+  double getTemperaturePercent() {
+    return OwnMath.round(temperatureCurrent / temperatureHigh);
   }
 }

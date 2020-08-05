@@ -18,8 +18,8 @@ virtualMemoryTotal = getattr(psutil.virtual_memory(), 'total')
 
 swapMemoryTotal = getattr(psutil.swap_memory(), 'total')
 
-temperaturHigh = getattr(psutil.sensors_temperatures()['acpitz'][0], 'high')
-temperaturCritical = getattr(psutil.sensors_temperatures()['acpitz'][0], 'critical')
+temperatureHigh = getattr(psutil.sensors_temperatures()['acpitz'][0], 'high')
+temperatureCritical = getattr(psutil.sensors_temperatures()['acpitz'][0], 'critical')
 
 def getData():
     return json.dumps(
@@ -54,8 +54,8 @@ def getData():
             'diskUsageTotal': getattr(psutil.disk_usage("/"), 'total'),
             'diskUsageUsed': getattr(psutil.disk_usage("/"), 'used'),
 
-            'temperaturCurrent': getattr(psutil.sensors_temperatures()['acpitz'][0], 'current'),
-            'temperaturHigh': temperaturHigh,
-            'temperaturCritical': temperaturCritical
+            'temperatureCurrent': getattr(psutil.sensors_temperatures()['acpitz'][0], 'current'),
+            'temperatureHigh': temperatureHigh,
+            'temperatureCritical': temperatureCritical
         }
     )

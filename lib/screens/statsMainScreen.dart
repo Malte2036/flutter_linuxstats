@@ -101,12 +101,12 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
                     OwnColors.percentToColor(ComputerData.currentComputerData
                         .getDiskUsagePercent())),
                 StatsBigWidget(
-                    "TEMPERATUR",
+                    "TEMPERATURE",
                     ComputerData.currentComputerData
-                        .getTemperaturCompareString(),
-                    ComputerData.currentComputerData.getTemperaturPercent(),
+                        .getTemperatureCompareString(),
+                    ComputerData.currentComputerData.getTemperaturePercent(),
                     OwnColors.percentToColor(ComputerData.currentComputerData
-                        .getTemperaturPercent())),
+                        .getTemperaturePercent())),
                 StatsBigWidget(
                     "BATTERY",
                     ComputerData.currentComputerData.getBatteryPercentString(),
