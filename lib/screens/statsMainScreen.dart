@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_linuxstats/communication/communicationState.dart';
 import 'package:flutter_linuxstats/communication/websocketCommunication.dart';
 import 'package:flutter_linuxstats/data/computerData.dart';
 import 'package:flutter_linuxstats/utils/ownColors.dart';
@@ -35,6 +36,24 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          ComputerData.currentComputerData.username +
+              "@" +
+              ComputerData.currentComputerData.hostname,
+        ),
+        centerTitle: true,
+        actions: <Widget>[
+          Icon(
+            Icons.power_settings_new,
+            color: WebsocketCommunication.communicationState ==
+                    CommunicationState.CONNECTED
+                ? OwnColors.greenColor
+                : OwnColors.redColor,
+          ),
+          Padding(padding: EdgeInsets.only(right: 20)),
+        ],
+      ),
       resizeToAvoidBottomInset: false,
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
@@ -42,16 +61,6 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
         child: ListView(
           primary: true,
           children: [
-            Center(
-              child: Text(
-                ComputerData.currentComputerData.username +
-                    "@" +
-                    ComputerData.currentComputerData.hostname,
-                style: TextStyle(
-                  fontSize: ScreenManager.getFontSize(context),
-                ),
-              ),
-            ),
             GridView.count(
               physics: ScrollPhysics(),
               shrinkWrap: true,

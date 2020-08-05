@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_linuxstats/communication/communicationState.dart';
 import 'package:flutter_linuxstats/data/computerData.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:wifi/wifi.dart';
@@ -9,15 +10,24 @@ import 'package:ping_discover_network/ping_discover_network.dart';
 
 class WebsocketCommunication {
   static final int port = 9499;
+  static CommunicationState communicationState =
+      CommunicationState.DISCONNECTED;
+
   static WebsocketCommunication currentWebsocketCommunication;
   IOWebSocketChannel channel;
   Timer timer;
+
+  WebsocketCommunication() {
+    communicationState = CommunicationState.DISCONNECTED;
+  }
 
   void connect() async {
     String url = "ws://" + (await getIPString(port)) + ":" + port.toString();
     print("Connecting to " + url + "...");
     channel = IOWebSocketChannel.connect(url);
     print("Connected!");
+
+    communicationState = CommunicationState.CONNECTED;
 
     askForSystemData();
 
@@ -29,9 +39,11 @@ class WebsocketCommunication {
         ComputerData.setCurrentComputerData(computerData);
       },
       onDone: () {
+        communicationState = CommunicationState.DISCONNECTED;
         connect();
       },
     );
+
     timer =
         Timer.periodic(Duration(seconds: 30), (Timer t) => askForSystemData());
   }
