@@ -90,7 +90,7 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
                                 ),
                               ),
                             ),
-                            Expanded(flex: 15, child: Container()),
+                            Expanded(flex: 25, child: Container()),
                           ],
                         ),
                       ],
