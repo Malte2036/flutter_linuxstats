@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_linuxstats/communication/communicationState.dart';
 import 'package:flutter_linuxstats/communication/websocketCommunication.dart';
 import 'package:flutter_linuxstats/data/computerData.dart';
+import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownColors.dart';
 import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsBigWidget.dart';
@@ -37,6 +38,8 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
   }
 
   _showConnectionRefusedDialog() {
+    if (Helper.isActiveConnectionRefusedDialog) return;
+    Helper.isActiveConnectionRefusedDialog = true;
     showDialog(
         context: context,
         builder: (_) => new AlertDialog(

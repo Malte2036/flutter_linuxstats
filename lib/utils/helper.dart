@@ -4,6 +4,7 @@ import 'package:flutter_linuxstats/screens/statsMainScreen.dart';
 
 class Helper {
   static StatsMainScreen currentStatsMainScreen;
+  static bool isActiveConnectionRefusedDialog = false;
   static Map<String, GlobalKey<FlipCardState>> allStatsBigWidgetFlipKeyMap =
       new Map<String, GlobalKey<FlipCardState>>();
 
