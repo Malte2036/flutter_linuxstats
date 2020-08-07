@@ -1,0 +1,22 @@
+name: linuxstats
+version: 0.1.0
+summary: LinuxStats
+description: A flutter application to monitor your Linux PC statistic.
+
+confinement: strict
+base: core18
+grade: stable
+
+apps:
+  linuxstats:
+    command: linuxstats
+    extensions: [flutter-master] # Where "master" defines which Flutter channel to use for the build
+    plugs:
+    - network
+
+parts:
+  linuxstats:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart # The main entry-point file of the application
+
