@@ -5,15 +5,16 @@ description: A flutter application to monitor your Linux PC statistic.
 
 confinement: strict
 base: core18
+grade: stable
 
 apps:
   linuxstats:
-    command: linuxstats
+    command: flutter_linuxstats
     extensions: [flutter-dev]
 
 parts:
   linuxstats:
     plugin: flutter
-    source: https://github.com/Malte2036/flutter_linuxstats.git
+    source: .
     flutter-target: lib/main.dart
 
