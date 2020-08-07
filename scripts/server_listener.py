@@ -12,12 +12,13 @@ async def echo(websocket, path):
 async def handleMessage(message, websocket):
     print(message)
     if(message == "getSystemData()"):
-        await sendSystemData(websocket)
+        await sendSystemData(websocket, system_data.getData())
+    elif(message == "getSystemDetailData()"):
+        await sendSystemData(websocket, system_data.getDetailData())
     else:
         print(colored("message not valid!", 'red'))
 
-async def sendSystemData(websocket):
-    data = system_data.getData()
+async def sendSystemData(websocket, data):
     await websocket.send(data)
     print(colored("Reply: " + data, 'green'))
 

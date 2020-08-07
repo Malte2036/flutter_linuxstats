@@ -37,8 +37,6 @@ class WebsocketCommunication {
 
     communicationState = CommunicationState.CONNECTED;
 
-    askForSystemData();
-
     Stream stream = channel.stream.asBroadcastStream();
     stream.listen((data) {
       print('got data: ' + data.toString());
@@ -54,6 +52,8 @@ class WebsocketCommunication {
       Helper.currentStatsMainScreen.showConnectionRefusedDialog();
     }, cancelOnError: true);
 
+    currentWebsocketCommunication.channel.sink.add("getSystemData()");
+
     timer =
         Timer.periodic(Duration(seconds: 30), (Timer t) => askForSystemData());
   }
@@ -66,7 +66,7 @@ class WebsocketCommunication {
         CommunicationState.DISCONNECTED)
       currentWebsocketCommunication.connect();
     else
-      currentWebsocketCommunication.channel.sink.add("getSystemData()");
+      currentWebsocketCommunication.channel.sink.add("getSystemDetailData()");
   }
 
   static Future<String> getIPString(int port) async {

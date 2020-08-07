@@ -112,36 +112,68 @@ class ComputerData {
 
   factory ComputerData.fromJson(Map<String, dynamic> json) {
     return ComputerData(
-      username: json['username'].toString(),
-      hostname: json['hostname'].toString(),
-      sysname: json['sysname'].toString(),
-      machine: json['machine'].toString(),
-      kernel: json['kernel'].toString(),
+      username: json.containsKey('username')
+          ? json['username'].toString()
+          : currentComputerData.username,
+      hostname: json.containsKey('hostname')
+          ? json['hostname'].toString()
+          : currentComputerData.hostname,
+      sysname: json.containsKey('sysname')
+          ? json['sysname'].toString()
+          : currentComputerData.sysname,
+      machine: json.containsKey('machine')
+          ? json['machine'].toString()
+          : currentComputerData.machine,
+      kernel: json.containsKey('kernel')
+          ? json['kernel'].toString()
+          : currentComputerData.kernel,
       uptime: json['uptime'],
-      cpu: json['cpu'].toString(),
-      gpu: json['gpu'].toString(),
+      cpu: json.containsKey('cpu')
+          ? json['cpu'].toString()
+          : currentComputerData.cpu,
+      gpu: json.containsKey('gpu')
+          ? json['gpu'].toString()
+          : currentComputerData.gpu,
       cpuPercent: json['cpuPercent'] / 100.0,
-      cpuCores: json['cpuCores'],
-      cpuPhysicalCores: json['cpuPhysicalCores'],
+      cpuCores: json.containsKey('cpuCores')
+          ? json['cpuCores']
+          : currentComputerData.cpuCores,
+      cpuPhysicalCores: json.containsKey('cpuPhysicalCores')
+          ? json['cpuPhysicalCores']
+          : currentComputerData.cpuPhysicalCores,
       cpuCurrentFreq: json['cpuCurrentFreq'],
-      cpuMinFreq: json['cpuMinFreq'],
-      cpuMaxFreq: json['cpuMaxFreq'],
+      cpuMinFreq: json.containsKey('cpuMinFreq')
+          ? json['cpuMinFreq']
+          : currentComputerData.cpuMinFreq,
+      cpuMaxFreq: json.containsKey('cpuMaxFreq')
+          ? json['cpuMaxFreq']
+          : currentComputerData.cpuMaxFreq,
       batteryPercent: json['batteryPercent'] / 100.0,
       batterySecsLeft: json['batterySecsLeft'],
       batteryPowerPlugged: json['batteryPowerPlugged'],
-      virtualMemoryTotal: json['virtualMemoryTotal'],
+      virtualMemoryTotal: json.containsKey('virtualMemoryTotal')
+          ? json['virtualMemoryTotal']
+          : currentComputerData.virtualMemoryTotal,
       virtualMemoryUsed: json['virtualMemoryUsed'],
       virtualMemoryFree: json['virtualMemoryFree'],
       virtualMemoryCached: json['virtualMemoryCached'],
-      swapMemoryTotal: json['swapMemoryTotal'],
+      swapMemoryTotal: json.containsKey('swapMemoryTotal')
+          ? json['swapMemoryTotal']
+          : currentComputerData.swapMemoryTotal,
       swapMemoryUsed: json['swapMemoryUsed'],
       swapMemoryFree: json['swapMemoryFree'],
-      diskUsageTotal: json['diskUsageTotal'],
+      diskUsageTotal: json.containsKey('diskUsageTotal')
+          ? json['diskUsageTotal']
+          : currentComputerData.diskUsageTotal,
       diskUsageUsed: json['diskUsageUsed'],
       diskUsageFree: json['diskUsageFree'],
       temperatureCurrent: json['temperatureCurrent'],
-      temperatureHigh: json['temperatureHigh'],
-      temperatureCritical: json['temperatureCritical'],
+      temperatureHigh: json.containsKey('temperatureHigh')
+          ? json['temperatureHigh']
+          : currentComputerData.temperatureHigh,
+      temperatureCritical: json.containsKey('temperatureCritical')
+          ? json['temperatureCritical']
+          : currentComputerData.temperatureCritical,
     );
   }
 
