@@ -1,5 +1,6 @@
 [![Made with Flutter](https://img.shields.io/badge/Made%20with-Flutter-%2345D1FE)](https://flutter.dev/)
 [![Codemagic build status](https://api.codemagic.io/apps/5f0a404c5b008641d6a223a9/5f0a404c5b008641d6a223a8/status_badge.svg)](https://codemagic.io/apps/5f0a404c5b008641d6a223a9/5f0a404c5b008641d6a223a8/latest_build)
+[![linuxstats](https://snapcraft.io//linuxstats/badge.svg)](https://snapcraft.io/linuxstats)
 
 # Linux Stats App
 
