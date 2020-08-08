@@ -1,5 +1,4 @@
-websockets
-daemon
-colored
-psutil
-os
+websockets==8.1
+python-daemon==2.2.4
+psutil==5.7.0
+termcolor==1.1.0

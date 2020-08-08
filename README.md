@@ -21,7 +21,7 @@ $ git clone https://github.com/Malte2036/flutter_linuxstats.git
 Install all needed python dependencies, listed in the [dependencies.txt](./scripts/dependencies.txt):
 
 ```console
-$ pip install <dependency>
+$ pip install -r scripts/dependencies.txt
 ```
 
 Run the python server script:
