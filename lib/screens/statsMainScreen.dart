@@ -104,7 +104,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
               physics: ScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: ScreenManager.getWidgetCountLine(context),
-              childAspectRatio: 1.175,
+              childAspectRatio: 1.15,
               children: <Widget>[
                 StatsBigWidget(
                     "CPU",
