@@ -1,4 +1,4 @@
-package de.malte2036.flutter_linuxstats
+package de.malte2036.linuxstats
 
 import io.flutter.embedding.android.FlutterActivity
 
