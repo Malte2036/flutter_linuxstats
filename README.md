@@ -9,6 +9,7 @@ A flutter application to monitor your Linux PC statistic.
 # Screenshots
 
 ![Screenshot1](screenshots/Screenshot1.png?raw=true)
+![Screenshot2](screenshots/Screenshot2.png?raw=true)
 
 # Installation
 
