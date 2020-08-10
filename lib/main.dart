@@ -4,7 +4,11 @@ import 'package:flutter_linuxstats/screens/statsMainScreen.dart';
 import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownTheme.dart';
 
+const bool isProduction = bool.fromEnvironment('dart.vm.product');
+
 void main() {
+  if (isProduction) debugPrint = (String message, {int wrapWidth}) {};
+
   WidgetsFlutterBinding.ensureInitialized();
   WebsocketCommunication.currentWebsocketCommunication =
       new WebsocketCommunication();
@@ -22,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     OwnTheme.currentOwnTheme.addListener(() {
-      print("Changes");
+      debugPrint("Changes");
       setState(() {});
     });
   }

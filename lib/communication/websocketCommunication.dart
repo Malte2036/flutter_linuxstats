@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_linuxstats/communication/communicationState.dart';
 import 'package:flutter_linuxstats/data/computerData.dart';
 import 'package:flutter_linuxstats/utils/helper.dart';
@@ -31,15 +32,15 @@ class WebsocketCommunication {
       return;
     }
     String url = "ws://" + ipString + ":" + port.toString();
-    print("Connecting to " + url + "...");
+    debugPrint("Connecting to " + url + "...");
     channel = IOWebSocketChannel.connect(url);
-    print("Connected!");
+    debugPrint("Connected!");
 
     communicationState = CommunicationState.CONNECTED;
 
     Stream stream = channel.stream.asBroadcastStream();
     stream.listen((data) {
-      print('got data: ' + data.toString());
+      debugPrint('got data: ' + data.toString());
       ComputerData computerData = ComputerData.fromJson(json.decode(data));
       ComputerData.setCurrentComputerData(computerData);
     }, onDone: () {
@@ -78,7 +79,7 @@ class WebsocketCommunication {
     var stream = NetworkAnalyzer.discover2(subnet, port);
     await for (NetworkAddress addr in stream) {
       if (addr.exists) {
-        print('Found device: ${addr.ip}');
+        debugPrint('Found device: ${addr.ip}');
         return addr.ip.toString();
       }
     }

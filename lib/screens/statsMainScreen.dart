@@ -29,7 +29,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
   Future<Null> _refresh() async {
-    print("call _refresh()");
+    debugPrint("call _refresh()");
     setState(() {});
   }
 
