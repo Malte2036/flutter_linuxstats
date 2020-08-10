@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_linuxstats/utils/ownColors.dart';
 
@@ -8,13 +10,20 @@ class OwnTheme with ChangeNotifier {
   static final ThemeData lightTheme = ThemeData(
     fontFamily: 'RobotoMono',
     brightness: Brightness.light,
-    cardColor: Color.fromRGBO(255, 255, 255, 0.25),
+    backgroundColor: Colors.white,
+    appBarTheme: AppBarTheme(
+      elevation: 7.5,
+    ),
+    cardColor: Colors.white,
     accentColor: OwnColors.greenColor,
   );
 
   static final ThemeData darkTheme = ThemeData(
     fontFamily: 'RobotoMono',
     brightness: Brightness.dark,
+    appBarTheme: AppBarTheme(
+      elevation: 7.5,
+    ),
     cardColor: Color.fromRGBO(0, 0, 0, 0.25),
     accentColor: OwnColors.greenColor,
   );

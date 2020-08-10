@@ -19,7 +19,7 @@ class _StatsDetailWidgetState extends State<StatsDetailWidget> {
         ComputerData.currentComputerData.getStatsDetailList(widget.typeString);
 
     return Card(
-      elevation: 2.0,
+      elevation: 7.5,
       child: SingleChildScrollView(
         primary: false,
         physics: const NeverScrollableScrollPhysics(),

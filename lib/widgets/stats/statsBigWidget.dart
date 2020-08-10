@@ -44,7 +44,7 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
         front: IgnorePointer(
           ignoring: true,
           child: Card(
-            elevation: 2.0,
+            elevation: 7.5,
             child: SingleChildScrollView(
               primary: false,
               physics: const NeverScrollableScrollPhysics(),
