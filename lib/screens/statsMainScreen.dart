@@ -68,7 +68,6 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var listTile = ListTile();
     return Scaffold(
       appBar: AppBar(
         title: Text(
