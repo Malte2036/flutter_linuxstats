@@ -9,6 +9,7 @@ import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsBigWidget.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsDetailWidget.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class StatsMainScreen extends StatefulWidget {
   _StatsMainScreenState currentStatsMainScreenState =
@@ -43,19 +44,27 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
     Helper.isActiveConnectionRefusedDialog = true;
     showDialog(
         context: context,
-        builder: (_) => new AlertDialog(
-              title: new Text("Connection refused"),
-              content: new Text(
-                  "Unfortunately, no running Linux server was found..."),
+        builder: (_) => AlertDialog(
+              title: Text("Connection refused"),
+              content:
+                  Text("Unfortunately, no running Linux server was found..."),
               actions: <Widget>[
                 FlatButton(
-                  child: Text('Close me'),
-                  onPressed: () {
+                  child: Text("How to use?"),
+                  onPressed: () async {
+                    const url =
+                        "https://github.com/Malte2036/flutter_linuxstats#installation";
+
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
                     Navigator.of(context).pop();
                   },
                 ),
                 FlatButton(
-                  child: Text('Reconnect!'),
+                  child: Text("Reconnect!"),
                   onPressed: () {
                     Navigator.of(context).pop();
                     WebsocketCommunication.currentWebsocketCommunication
