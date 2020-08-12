@@ -43,36 +43,36 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
     if (Helper.isActiveConnectionRefusedDialog) return;
     Helper.isActiveConnectionRefusedDialog = true;
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              title: Text("Connection refused"),
-              content:
-                  Text("Unfortunately, no running Linux server was found..."),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text("How to use?"),
-                  onPressed: () async {
-                    const url =
-                        "https://github.com/Malte2036/flutter_linuxstats#installation";
+      barrierDismissible: false,
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text("Connection refused"),
+        content: Text("Unfortunately, no running Linux server was found..."),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("How to use?"),
+            onPressed: () async {
+              const url =
+                  "https://github.com/Malte2036/flutter_linuxstats#installation";
 
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                    Navigator.of(context).pop();
-                  },
-                ),
-                FlatButton(
-                  child: Text("Reconnect!"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    WebsocketCommunication.currentWebsocketCommunication
-                        .connect();
-                  },
-                )
-              ],
-            ));
+              if (await canLaunch(url)) {
+                await launch(url);
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+          ),
+          FlatButton(
+            child: Text("Reconnect!"),
+            onPressed: () {
+              Navigator.of(context).pop();
+              Helper.isActiveConnectionRefusedDialog = false;
+              WebsocketCommunication.currentWebsocketCommunication.connect();
+            },
+          )
+        ],
+      ),
+    );
   }
 
   @override

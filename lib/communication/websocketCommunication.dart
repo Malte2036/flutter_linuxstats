@@ -24,6 +24,7 @@ class WebsocketCommunication {
   }
 
   void connect() async {
+    if (Helper.isActiveConnectionRefusedDialog) return;
     String ipString = await getIPString(port);
     if (ipString.length == 0) {
       communicationState = CommunicationState.DISCONNECTED;
