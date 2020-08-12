@@ -18,6 +18,8 @@ async def handleMessage(message, websocket):
     else:
         print(colored("message not valid!", 'red'))
 
+    await asyncio.sleep(2)
+
 async def sendSystemData(websocket, data):
     await websocket.send(data)
     print(colored("Reply: " + data, 'green'))
