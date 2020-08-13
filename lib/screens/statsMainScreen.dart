@@ -42,6 +42,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
   _showConnectionRefusedDialog() {
     if (Helper.isActiveConnectionRefusedDialog) return;
     Helper.isActiveConnectionRefusedDialog = true;
+    Helper.flipAllStatsBigWidgetsBack();
     showDialog(
       barrierDismissible: false,
       context: context,
