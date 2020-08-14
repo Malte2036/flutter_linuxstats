@@ -90,7 +90,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
           Tooltip(
             message: WebsocketCommunication.communicationState ==
                     CommunicationState.CONNECTED
-                ? "CONNECTED " + 
+                ? "CONNECTED "
                 : "DISCONNECTED",
             waitDuration: Duration(microseconds: 1),
             child: Icon(
