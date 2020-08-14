@@ -90,7 +90,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
           Tooltip(
             message: WebsocketCommunication.communicationState ==
                     CommunicationState.CONNECTED
-                ? "CONNECTED"
+                ? "CONNECTED " + 
                 : "DISCONNECTED",
             waitDuration: Duration(microseconds: 1),
             child: Icon(
@@ -108,14 +108,14 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            ListTile(),
+            /*ListTile(),
             SwitchListTile(
               title: Text("Darkmode"),
               value: !OwnTheme.isLightTheme(),
               onChanged: (bool value) {
                 OwnTheme.switchTheme();
               },
-            ),
+            ),*/
           ],
         ),
       ),
