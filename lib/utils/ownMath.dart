@@ -36,16 +36,17 @@ class OwnMath {
     return double.parse(d.toStringAsFixed(length));
   }
 
-  static String secondsToHumanString(int ms) {
-    if (ms <= 0) return "";
+  static String secondsToHumanString(int sec) {
+    if (sec <= 0) return "";
+    if (sec <= 59) return "0 minutes";
 
     List<int> allTimeSize = [86400, 3600, 60];
     List<String> allTimeSizeString = ["days", "hours", "minutes"];
 
-    String humanTimeString = ""; //"5 hours, 1 min";
+    String humanTimeString = "";
     for (int i = 0; i < allTimeSize.length; i++) {
       int timeSize = allTimeSize[i];
-      int count = ms ~/ timeSize;
+      int count = sec ~/ timeSize;
 
       if (count != 0) {
         String timeSizeString = allTimeSizeString[i];
@@ -54,7 +55,7 @@ class OwnMath {
               timeSizeString.substring(0, timeSizeString.length - 1);
 
         humanTimeString += count.toString() + " " + timeSizeString + ", ";
-        ms -= (count * timeSize);
+        sec -= (count * timeSize);
       }
     }
     return humanTimeString.substring(0, humanTimeString.length - 2);
