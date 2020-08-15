@@ -28,6 +28,11 @@ temperatureHigh = getattr(psutil.sensors_temperatures()['acpitz'][0], 'high')
 temperatureCritical = getattr(psutil.sensors_temperatures()['acpitz'][0], 'critical')
 
 def getData():
+    sensorsBattery = psutil.sensors_battery()
+    virtualMemory = psutil.virtual_memory()
+    swapMemory = psutil.swap_memory()
+    diskUsage = psutil.disk_usage("/")
+
     return json.dumps(
         {
             'username': username,
@@ -44,22 +49,22 @@ def getData():
             'cpuMinFreq': cpuMinFreq,
             'cpuMaxFreq': cpuMaxFreq,
             
-            'batteryPercent': getattr(psutil.sensors_battery(), 'percent'),
-            'batterySecsLeft': getattr(psutil.sensors_battery(), 'secsleft'),
-            'batteryPowerPlugged': getattr(psutil.sensors_battery(), 'power_plugged'),
+            'batteryPercent': getattr(sensorsBattery, 'percent'),
+            'batterySecsLeft': getattr(sensorsBattery, 'secsleft'),
+            'batteryPowerPlugged': getattr(sensorsBattery, 'power_plugged'),
             
             'virtualMemoryTotal': virtualMemoryTotal,
-            'virtualMemoryUsed': getattr(psutil.virtual_memory(), 'used'),
-            'virtualMemoryFree': getattr(psutil.virtual_memory(), 'free'),
-            'virtualMemoryCached': getattr(psutil.virtual_memory(), 'cached'),
+            'virtualMemoryUsed': getattr(virtualMemory, 'used'),
+            'virtualMemoryFree': getattr(virtualMemory, 'free'),
+            'virtualMemoryCached': getattr(virtualMemory, 'cached'),
             
             'swapMemoryTotal': swapMemoryTotal,
-            'swapMemoryUsed': getattr(psutil.swap_memory(), 'used'),
-            'swapMemoryFree': getattr(psutil.swap_memory(), 'free'),
+            'swapMemoryUsed': getattr(swapMemory, 'used'),
+            'swapMemoryFree': getattr(swapMemory, 'free'),
             
             'diskUsageTotal': diskUsageTotal,
-            'diskUsageUsed': getattr(psutil.disk_usage("/"), 'used'),
-            'diskUsageFree': getattr(psutil.disk_usage("/"), 'free'),
+            'diskUsageUsed': getattr(diskUsage, 'used'),
+            'diskUsageFree': getattr(diskUsage, 'free'),
 
             'temperatureCurrent': getattr(psutil.sensors_temperatures()['acpitz'][0], 'current'),
             'temperatureHigh': temperatureHigh,
@@ -68,6 +73,11 @@ def getData():
     )
 
 def getDetailData():
+    sensorsBattery = psutil.sensors_battery()
+    virtualMemory = psutil.virtual_memory()
+    swapMemory = psutil.swap_memory()
+    diskUsage = psutil.disk_usage("/")
+
     return json.dumps(
         {
             'uptime': time.time() - boottime,
@@ -75,19 +85,19 @@ def getDetailData():
             'cpuPercent': psutil.cpu_percent(),
             'cpuCurrentFreq':  getattr(psutil.cpu_freq(), 'current'),
             
-            'batteryPercent': getattr(psutil.sensors_battery(), 'percent'),
-            'batterySecsLeft': getattr(psutil.sensors_battery(), 'secsleft'),
-            'batteryPowerPlugged': getattr(psutil.sensors_battery(), 'power_plugged'),
+            'batteryPercent': getattr(sensorsBattery, 'percent'),
+            'batterySecsLeft': getattr(sensorsBattery, 'secsleft'),
+            'batteryPowerPlugged': getattr(sensorsBattery, 'power_plugged'),
             
-            'virtualMemoryUsed': getattr(psutil.virtual_memory(), 'used'),
-            'virtualMemoryFree': getattr(psutil.virtual_memory(), 'free'),
-            'virtualMemoryCached': getattr(psutil.virtual_memory(), 'cached'),
+            'virtualMemoryUsed': getattr(virtualMemory, 'used'),
+            'virtualMemoryFree': getattr(virtualMemory, 'free'),
+            'virtualMemoryCached': getattr(virtualMemory, 'cached'),
 
-            'swapMemoryUsed': getattr(psutil.swap_memory(), 'used'),
-            'swapMemoryFree': getattr(psutil.swap_memory(), 'free'),
+            'swapMemoryUsed': getattr(swapMemory, 'used'),
+            'swapMemoryFree': getattr(swapMemory, 'free'),
             
-            'diskUsageUsed': getattr(psutil.disk_usage("/"), 'used'),
-            'diskUsageFree': getattr(psutil.disk_usage("/"), 'free'),
+            'diskUsageUsed': getattr(diskUsage, 'used'),
+            'diskUsageFree': getattr(diskUsage, 'free'),
 
             'temperatureCurrent': getattr(psutil.sensors_temperatures()['acpitz'][0], 'current'),
         }
