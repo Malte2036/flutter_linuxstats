@@ -3,11 +3,13 @@ import os
 import time
 import json
 
+uname = os.uname()
+
 username = os.getlogin()
-hostname = getattr(os.uname(), 'nodename')
-sysname = getattr(os.uname(), 'sysname')
-machine = getattr(os.uname(), 'machine')
-kernel = getattr(os.uname(), 'release')
+hostname = getattr(uname, 'nodename')
+sysname = getattr(uname, 'sysname')
+machine = getattr(uname, 'machine')
+kernel = getattr(uname, 'release')
 
 boottime = psutil.boot_time()
 
