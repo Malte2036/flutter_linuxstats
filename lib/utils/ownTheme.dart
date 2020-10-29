@@ -16,7 +16,7 @@ class OwnTheme with ChangeNotifier {
       color: Colors.white,
     ),
     primaryIconTheme: IconThemeData(color: Colors.black),
-    cardColor: Colors.white,
+    cardColor: Colors.white70,
     accentColor: OwnColors.greenColor,
   );
 
