@@ -108,14 +108,14 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            /*ListTile(),
+            ListTile(),
             SwitchListTile(
               title: Text("Darkmode"),
               value: !OwnTheme.isLightTheme(),
               onChanged: (bool value) {
                 OwnTheme.switchTheme();
               },
-            ),*/
+            ),
           ],
         ),
       ),
