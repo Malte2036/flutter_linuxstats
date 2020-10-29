@@ -25,6 +25,7 @@ class OwnTheme with ChangeNotifier {
     brightness: Brightness.dark,
     appBarTheme: AppBarTheme(
       elevation: 7.5,
+      color: Colors.black,
     ),
     cardColor: Color.fromRGBO(0, 0, 0, 0.25),
     accentColor: OwnColors.greenColor,
