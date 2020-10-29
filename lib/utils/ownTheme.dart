@@ -13,7 +13,9 @@ class OwnTheme with ChangeNotifier {
     backgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
       elevation: 7.5,
+      color: Colors.white,
     ),
+    primaryIconTheme: IconThemeData(color: Colors.black),
     cardColor: Colors.white,
     accentColor: OwnColors.greenColor,
   );

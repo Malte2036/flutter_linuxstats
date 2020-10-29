@@ -54,46 +54,57 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
                   Container(
                     width: ScreenManager.getQuadratObjectSize(context),
                     height: ScreenManager.getQuadratObjectSize(context) * 0.75,
-                    child: Stack(
-                      children: <Widget>[
-                        HalfGaugeChart.fromPercent(
-                          1.0,
-                          OwnTheme.getCurrentThemeData()
-                              .scaffoldBackgroundColor,
-                          animate: false,
-                          arcWidth:
-                              (ScreenManager.getQuadratObjectSize(context) *
-                                      0.1)
-                                  .toInt(),
-                        ),
-                        HalfGaugeChart.fromPercent(
-                          widget.percent,
-                          widget.color,
-                          animate: true,
-                          arcWidth:
-                              (ScreenManager.getQuadratObjectSize(context) *
-                                      0.075)
-                                  .toInt(),
-                        ),
-                        Column(
-                          children: <Widget>[
-                            Expanded(flex: 55, child: Container()),
-                            Expanded(
-                              flex: 20,
-                              child: Center(
-                                child: Text(
-                                  widget.countString,
-                                  style: TextStyle(
-                                    fontSize:
-                                        ScreenManager.getFontSize(context),
-                                  ),
-                                ),
+                    child: FutureBuilder(
+                      future: Future.delayed(Duration(milliseconds: 500), () {
+                        return true;
+                      }),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Stack(
+                            children: <Widget>[
+                              HalfGaugeChart.fromPercent(
+                                1.0,
+                                OwnTheme.getCurrentThemeData()
+                                    .scaffoldBackgroundColor,
+                                animate: false,
+                                arcWidth: (ScreenManager.getQuadratObjectSize(
+                                            context) *
+                                        0.1)
+                                    .toInt(),
                               ),
-                            ),
-                            Expanded(flex: 25, child: Container()),
-                          ],
-                        ),
-                      ],
+                              HalfGaugeChart.fromPercent(
+                                widget.percent,
+                                widget.color,
+                                animate: true,
+                                arcWidth: (ScreenManager.getQuadratObjectSize(
+                                            context) *
+                                        0.075)
+                                    .toInt(),
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Expanded(flex: 55, child: Container()),
+                                  Expanded(
+                                    flex: 20,
+                                    child: Center(
+                                      child: Text(
+                                        widget.countString,
+                                        style: TextStyle(
+                                          fontSize: ScreenManager.getFontSize(
+                                              context),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(flex: 25, child: Container()),
+                                ],
+                              ),
+                            ],
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
                     ),
                   ),
                 ],
