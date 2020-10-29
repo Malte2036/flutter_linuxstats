@@ -84,6 +84,9 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
           ComputerData.currentComputerData.username +
               "@" +
               ComputerData.currentComputerData.hostname,
+          style: TextStyle(
+            color: Colors.black,
+          ),
         ),
         centerTitle: true,
         actions: <Widget>[
