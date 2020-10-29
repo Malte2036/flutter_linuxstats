@@ -131,7 +131,7 @@ packages:
       name: flutter_launcher_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.5"
+    version: "0.8.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -225,21 +225,7 @@ packages:
       name: ping_discover_network
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
-  platform:
-    dependency: transitive
-    description:
-      name: platform
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.1"
-  platform_detect:
-    dependency: transitive
-    description:
-      name: platform_detect
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.4.0"
+    version: "0.2.0+1"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -363,7 +349,7 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.5.0"
+    version: "5.7.8"
   url_launcher_linux:
     dependency: transitive
     description:
@@ -384,14 +370,21 @@ packages:
       name: url_launcher_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.7"
+    version: "1.0.9"
   url_launcher_web:
     dependency: transitive
     description:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.2"
+    version: "0.1.5"
+  url_launcher_windows:
+    dependency: transitive
+    description:
+      name: url_launcher_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1+1"
   vector_math:
     dependency: transitive
     description:
