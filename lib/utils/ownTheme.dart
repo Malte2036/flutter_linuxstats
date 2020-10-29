@@ -1,12 +1,16 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownColors.dart';
 
 class OwnTheme with ChangeNotifier {
   static OwnTheme currentOwnTheme = new OwnTheme();
 
-  bool _isLightTheme = false;
+  bool _isLightTheme = Helper.prefs.containsKey("isLightTheme")
+      ? Helper.prefs.getBool("isLightTheme")
+      : false;
+
   static final ThemeData lightTheme = ThemeData(
     fontFamily: 'RobotoMono',
     brightness: Brightness.light,
@@ -45,5 +49,7 @@ class OwnTheme with ChangeNotifier {
   static void switchTheme() {
     currentOwnTheme._isLightTheme = !isLightTheme();
     currentOwnTheme.notifyListeners();
+
+    Helper.prefs.setBool("isLightTheme", isLightTheme());
   }
 }
