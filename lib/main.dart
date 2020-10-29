@@ -3,6 +3,7 @@ import 'package:flutter_linuxstats/communication/websocketCommunication.dart';
 import 'package:flutter_linuxstats/screens/statsMainScreen.dart';
 import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownTheme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const bool isProduction = bool.fromEnvironment('dart.vm.product');
 
@@ -13,7 +14,12 @@ void main() {
   WebsocketCommunication.currentWebsocketCommunication =
       new WebsocketCommunication();
   WebsocketCommunication.currentWebsocketCommunication.connect();
-  runApp(MyApp());
+
+  Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+  prefs.then((prefs) {
+    Helper.prefs = prefs;
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatefulWidget {
