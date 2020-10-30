@@ -31,4 +31,4 @@ Run the python server script:
 $ python scripts/server_listener.py
 ```
 
-Run the linux or android client, by downloading the android application from the [play store](https://play.google.com/store/apps/details?id=de.malte2036.linuxstats) or [linux snapcraft](https://snapcraft.io/linuxstats) package.
+Run the linux or android client, by downloading the android application from the [google play store](https://play.google.com/store/apps/details?id=de.malte2036.linuxstats) or the [linux snapcraft](https://snapcraft.io/linuxstats) package.
