@@ -52,3 +52,5 @@ gradlew*
 install
 ios
 test
+.project
+.settings/
