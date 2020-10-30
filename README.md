@@ -32,3 +32,6 @@ $ python scripts/server_listener.py
 ```
 
 Run the linux or android client, by downloading the android application from the [google play store](https://play.google.com/store/apps/details?id=de.malte2036.linuxstats) or the [linux snapcraft](https://snapcraft.io/linuxstats) package.
+
+[![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=de.malte2036.linuxstats)
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/linuxstats)
