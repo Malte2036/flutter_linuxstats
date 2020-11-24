@@ -1,4 +1,5 @@
 import psutil
+import cpuinfo
 import os
 import time
 import json
@@ -10,6 +11,7 @@ hostname = getattr(uname, 'nodename')
 sysname = getattr(uname, 'sysname')
 machine = getattr(uname, 'machine')
 kernel = getattr(uname, 'release')
+cpu = cpuinfo.get_cpu_info()['brand_raw']
 
 boottime = psutil.boot_time()
 
@@ -41,6 +43,7 @@ def getData():
             'machine': machine,
             'kernel': kernel,
             'uptime': time.time() - boottime,
+            'cpu': cpu,
             
             'cpuPercent': psutil.cpu_percent(),
             'cpuCores': cpuCores,
