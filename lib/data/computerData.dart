@@ -134,7 +134,8 @@ class ComputerData {
       gpu: json.containsKey('gpu')
           ? json['gpu'].toString()
           : currentComputerData.gpu,
-      cpuPercent: json['cpuPercent'] / 100.0,
+      cpuPercent:
+          json.containsKey('cpuPercent') ? json['cpuPercent'] / 100.0 : 0,
       cpuCores: json.containsKey('cpuCores')
           ? json['cpuCores']
           : currentComputerData.cpuCores,
@@ -148,26 +149,40 @@ class ComputerData {
       cpuMaxFreq: json.containsKey('cpuMaxFreq')
           ? json['cpuMaxFreq']
           : currentComputerData.cpuMaxFreq,
-      batteryPercent: json['batteryPercent'] / 100.0,
-      batterySecsLeft: json['batterySecsLeft'],
-      batteryPowerPlugged: json['batteryPowerPlugged'],
+      batteryPercent: json.containsKey('batteryPercent')
+          ? json['batteryPercent'] / 100.0
+          : 0,
+      batterySecsLeft:
+          json.containsKey('batterySecsLeft') ? json['batterySecsLeft'] : 0,
+      batteryPowerPlugged: json.containsKey('batteryPowerPlugged')
+          ? json['batteryPowerPlugged']
+          : true,
       virtualMemoryTotal: json.containsKey('virtualMemoryTotal')
           ? json['virtualMemoryTotal']
           : currentComputerData.virtualMemoryTotal,
-      virtualMemoryUsed: json['virtualMemoryUsed'],
-      virtualMemoryFree: json['virtualMemoryFree'],
-      virtualMemoryCached: json['virtualMemoryCached'],
+      virtualMemoryUsed:
+          json.containsKey('virtualMemoryUsed') ? json['virtualMemoryUsed'] : 0,
+      virtualMemoryFree:
+          json.containsKey('virtualMemoryFree') ? json['virtualMemoryFree'] : 0,
+      virtualMemoryCached:
+          json.containsKey('swapMemoryTotal') ? json['virtualMemoryCached'] : 0,
       swapMemoryTotal: json.containsKey('swapMemoryTotal')
           ? json['swapMemoryTotal']
           : currentComputerData.swapMemoryTotal,
-      swapMemoryUsed: json['swapMemoryUsed'],
-      swapMemoryFree: json['swapMemoryFree'],
+      swapMemoryUsed:
+          json.containsKey('swapMemoryTotal') ? json['swapMemoryUsed'] : 0,
+      swapMemoryFree:
+          json.containsKey('swapMemoryFree') ? json['swapMemoryFree'] : 0,
       diskUsageTotal: json.containsKey('diskUsageTotal')
           ? json['diskUsageTotal']
           : currentComputerData.diskUsageTotal,
-      diskUsageUsed: json['diskUsageUsed'],
-      diskUsageFree: json['diskUsageFree'],
-      temperatureCurrent: json['temperatureCurrent'],
+      diskUsageUsed:
+          json.containsKey('diskUsageUsed') ? json['diskUsageUsed'] : 0,
+      diskUsageFree:
+          json.containsKey('diskUsageUsed') ? json['diskUsageFree'] : 0,
+      temperatureCurrent: json.containsKey('temperatureCurrent')
+          ? json['temperatureCurrent']
+          : 0,
       temperatureHigh: json.containsKey('temperatureHigh')
           ? json['temperatureHigh']
           : currentComputerData.temperatureHigh,
