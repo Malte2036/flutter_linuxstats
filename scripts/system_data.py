@@ -26,14 +26,29 @@ swapMemoryTotal = getattr(psutil.swap_memory(), 'total')
 
 diskUsageTotal = getattr(psutil.disk_usage("/"), 'total')
 
-temperatureHigh = getattr(psutil.sensors_temperatures()['acpitz'][0], 'high')
-temperatureCritical = getattr(psutil.sensors_temperatures()['acpitz'][0], 'critical')
+temperatureHigh = 0.0
+temperatureCritical = 0.0
+if psutil.sensors_temperatures().get("acpitz") is not None:
+    temperatureHigh =  getattr(psutil.sensors_temperatures()['acpitz'][0], 'high')
+    temperatureCritical =  getattr(psutil.sensors_temperatures()['acpitz'][0], 'critical')
 
 def getData():
     sensorsBattery = psutil.sensors_battery()
+    batteryPercent = 0.0
+    batterySecsLeft = 0
+    batteryPowerPlugged = True
+    if sensorsBattery is not None:
+        batteryPercent = getattr(sensorsBattery, 'percent')
+        batterySecsLeft = getattr(sensorsBattery, 'secsleft')
+        batteryPowerPlugged=  getattr(sensorsBattery, 'power_plugged')
+
     virtualMemory = psutil.virtual_memory()
     swapMemory = psutil.swap_memory()
     diskUsage = psutil.disk_usage("/")
+
+    temperatureCurrent = 0.0
+    if psutil.sensors_temperatures().get("acpitz") is not None:
+        temperatureCurrent =  getattr(psutil.sensors_temperatures()['acpitz'][0], 'current')
 
     return json.dumps(
         {
@@ -52,9 +67,9 @@ def getData():
             'cpuMinFreq': cpuMinFreq,
             'cpuMaxFreq': cpuMaxFreq,
             
-            'batteryPercent': getattr(sensorsBattery, 'percent'),
-            'batterySecsLeft': getattr(sensorsBattery, 'secsleft'),
-            'batteryPowerPlugged': getattr(sensorsBattery, 'power_plugged'),
+            'batteryPercent': batteryPercent,
+            'batterySecsLeft': batterySecsLeft,
+            'batteryPowerPlugged': batteryPowerPlugged,
             
             'virtualMemoryTotal': virtualMemoryTotal,
             'virtualMemoryUsed': getattr(virtualMemory, 'used'),
@@ -69,7 +84,7 @@ def getData():
             'diskUsageUsed': getattr(diskUsage, 'used'),
             'diskUsageFree': getattr(diskUsage, 'free'),
 
-            'temperatureCurrent': getattr(psutil.sensors_temperatures()['acpitz'][0], 'current'),
+            'temperatureCurrent': temperatureCurrent,
             'temperatureHigh': temperatureHigh,
             'temperatureCritical': temperatureCritical
         }
@@ -77,9 +92,21 @@ def getData():
 
 def getDetailData():
     sensorsBattery = psutil.sensors_battery()
+    batteryPercent = 0.0
+    batterySecsLeft = 0
+    batteryPowerPlugged = True
+    if sensorsBattery is not None:
+        batteryPercent = getattr(sensorsBattery, 'percent')
+        batterySecsLeft = getattr(sensorsBattery, 'secsleft')
+        batteryPowerPlugged=  getattr(sensorsBattery, 'power_plugged')
+
     virtualMemory = psutil.virtual_memory()
     swapMemory = psutil.swap_memory()
     diskUsage = psutil.disk_usage("/")
+
+    temperatureCurrent = 0.0
+    if psutil.sensors_temperatures().get("acpitz") is not None:
+        temperatureCurrent =  getattr(psutil.sensors_temperatures()['acpitz'][0], 'current')
 
     return json.dumps(
         {
@@ -88,9 +115,9 @@ def getDetailData():
             'cpuPercent': psutil.cpu_percent(),
             'cpuCurrentFreq':  getattr(psutil.cpu_freq(), 'current'),
             
-            'batteryPercent': getattr(sensorsBattery, 'percent'),
-            'batterySecsLeft': getattr(sensorsBattery, 'secsleft'),
-            'batteryPowerPlugged': getattr(sensorsBattery, 'power_plugged'),
+            'batteryPercent': batteryPercent,
+            'batterySecsLeft': batterySecsLeft,
+            'batteryPowerPlugged': batteryPowerPlugged,
             
             'virtualMemoryUsed': getattr(virtualMemory, 'used'),
             'virtualMemoryFree': getattr(virtualMemory, 'free'),
@@ -102,6 +129,6 @@ def getDetailData():
             'diskUsageUsed': getattr(diskUsage, 'used'),
             'diskUsageFree': getattr(diskUsage, 'free'),
 
-            'temperatureCurrent': getattr(psutil.sensors_temperatures()['acpitz'][0], 'current'),
+            'temperatureCurrent': temperatureCurrent,
         }
     )
