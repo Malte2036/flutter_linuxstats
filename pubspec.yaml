@@ -1,5 +1,5 @@
 name: flutter_linuxstats
-description: A new Flutter project.
+description: A flutter application to monitor your Linux PC statistic.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
