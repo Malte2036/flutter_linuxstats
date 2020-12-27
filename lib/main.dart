@@ -8,15 +8,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 const bool isProduction = bool.fromEnvironment('dart.vm.product');
 
 void main() {
-  if (isProduction) debugPrint = (String message, {int wrapWidth}) {};
+  if (isProduction) {
+    debugPrint = (String message, {int wrapWidth}) {};
+  }
 
   WidgetsFlutterBinding.ensureInitialized();
   WebsocketCommunication.currentWebsocketCommunication =
-      new WebsocketCommunication();
+      WebsocketCommunication();
   WebsocketCommunication.currentWebsocketCommunication.connect();
 
-  Future<SharedPreferences> prefs = SharedPreferences.getInstance();
-  prefs.then((prefs) {
+  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+  prefs.then((SharedPreferences prefs) {
     Helper.prefs = prefs;
     runApp(MyApp());
   });
@@ -32,14 +34,14 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     OwnTheme.currentOwnTheme.addListener(() {
-      debugPrint("Changes");
+      debugPrint('Changes');
       setState(() {});
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    Helper.currentStatsMainScreen = new StatsMainScreen();
+    Helper.currentStatsMainScreen = StatsMainScreen();
     return MaterialApp(
       title: 'Linux Stats',
       debugShowCheckedModeBanner: false,

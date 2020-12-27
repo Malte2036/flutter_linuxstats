@@ -2,47 +2,6 @@ import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownMath.dart';
 
 class ComputerData {
-  static ComputerData currentComputerData = ComputerData.emptyData();
-
-  final DateTime updated = DateTime.now();
-
-  final String username;
-  final String hostname;
-  final String sysname;
-  final String machine;
-  final String kernel;
-  final double uptime;
-  final String cpu;
-  final String gpu;
-
-  final double cpuPercent;
-  final int cpuCores;
-  final int cpuPhysicalCores;
-  final double cpuCurrentFreq;
-  final double cpuMinFreq;
-  final double cpuMaxFreq;
-
-  final double batteryPercent;
-  final int batterySecsLeft;
-  final bool batteryPowerPlugged;
-
-  final int virtualMemoryTotal;
-  final int virtualMemoryUsed;
-  final int virtualMemoryFree;
-  final int virtualMemoryCached;
-
-  final int swapMemoryTotal;
-  final int swapMemoryUsed;
-  final int swapMemoryFree;
-
-  final int diskUsageTotal;
-  final int diskUsageUsed;
-  final int diskUsageFree;
-
-  final double temperatureCurrent;
-  final double temperatureHigh;
-  final double temperatureCritical;
-
   ComputerData(
       {this.username,
       this.hostname,
@@ -77,14 +36,14 @@ class ComputerData {
 
   factory ComputerData.emptyData() {
     return ComputerData(
-      username: "",
-      hostname: "",
-      sysname: "",
-      machine: "",
-      kernel: "",
+      username: '',
+      hostname: '',
+      sysname: '',
+      machine: '',
+      kernel: '',
       uptime: 0,
-      cpu: "",
-      gpu: "",
+      cpu: '',
+      gpu: '',
       cpuPercent: 0,
       cpuCores: 0,
       cpuPhysicalCores: 0,
@@ -192,6 +151,47 @@ class ComputerData {
     );
   }
 
+  static ComputerData currentComputerData = ComputerData.emptyData();
+
+  final DateTime updated = DateTime.now();
+
+  final String username;
+  final String hostname;
+  final String sysname;
+  final String machine;
+  final String kernel;
+  final double uptime;
+  final String cpu;
+  final String gpu;
+
+  final double cpuPercent;
+  final int cpuCores;
+  final int cpuPhysicalCores;
+  final double cpuCurrentFreq;
+  final double cpuMinFreq;
+  final double cpuMaxFreq;
+
+  final double batteryPercent;
+  final int batterySecsLeft;
+  final bool batteryPowerPlugged;
+
+  final int virtualMemoryTotal;
+  final int virtualMemoryUsed;
+  final int virtualMemoryFree;
+  final int virtualMemoryCached;
+
+  final int swapMemoryTotal;
+  final int swapMemoryUsed;
+  final int swapMemoryFree;
+
+  final int diskUsageTotal;
+  final int diskUsageUsed;
+  final int diskUsageFree;
+
+  final double temperatureCurrent;
+  final double temperatureHigh;
+  final double temperatureCritical;
+
   static void setCurrentComputerData(ComputerData newComputerData) {
     currentComputerData = newComputerData;
     Helper.currentStatsMainScreen.refresh();
@@ -199,112 +199,132 @@ class ComputerData {
 
   List<String> getStatsDetailList(String typeString) {
     switch (typeString.toUpperCase()) {
-      case "CPU":
-        return [
-          "Cores: " + getCPUCoresString(),
-          "Physical Cores: " + getCPUPhysicalCoresString(),
-          "Current Frequency: " + getCPUCurrentFrequencyString(),
-          "Min Frequency: " + getCPUMinFrequencyString(),
-          "Max Frequency: " + getCPUMaxFrequencyString(),
-          "Percent: " + getCPUPercentString(),
+      case 'CPU':
+        return <String>[
+          'Cores: ' + getCPUCoresString(),
+          'Physical Cores: ' + getCPUPhysicalCoresString(),
+          'Current Frequency: ' + getCPUCurrentFrequencyString(),
+          'Min Frequency: ' + getCPUMinFrequencyString(),
+          'Max Frequency: ' + getCPUMaxFrequencyString(),
+          'Percent: ' + getCPUPercentString(),
         ];
-      case "MEMORY":
-        return [
-          "Total: " + getVirtualMemoryTotalString(),
-          "Used: " + getVirtualMemoryUsedString(),
-          "Free: " + getVirtualMemoryFreeString(),
-          "Cached: " + getVirtualMemoryCachedString(),
-          "Percent: " + getVirtualMemoryPercentString(),
+      case 'MEMORY':
+        return <String>[
+          'Total: ' + getVirtualMemoryTotalString(),
+          'Used: ' + getVirtualMemoryUsedString(),
+          'Free: ' + getVirtualMemoryFreeString(),
+          'Cached: ' + getVirtualMemoryCachedString(),
+          'Percent: ' + getVirtualMemoryPercentString(),
         ];
-      case "SWAP":
-        return [
-          "Total: " + getSwapMemoryTotalString(),
-          "Used: " + getSwapMemoryUsedString(),
-          "Free: " + getSwapMemoryFreeString(),
-          "Percent: " + getSwapMemoryPercentString(),
+      case 'SWAP':
+        return <String>[
+          'Total: ' + getSwapMemoryTotalString(),
+          'Used: ' + getSwapMemoryUsedString(),
+          'Free: ' + getSwapMemoryFreeString(),
+          'Percent: ' + getSwapMemoryPercentString(),
         ];
-      case "DISK":
-        return [
-          "Total: " + getDiskUsageTotalString(),
-          "Used: " + getDiskUsageUsedString(),
-          "Free: " + getDiskUsageFreeString(),
-          "Percent: " + getDiskUsagePercentString(),
+      case 'DISK':
+        return <String>[
+          'Total: ' + getDiskUsageTotalString(),
+          'Used: ' + getDiskUsageUsedString(),
+          'Free: ' + getDiskUsageFreeString(),
+          'Percent: ' + getDiskUsagePercentString(),
         ];
-      case "TEMPERATURE":
-        return [
-          "Current: " + getTemperatureCurrentString(),
-          "High: " + getTemperatureHighString(),
-          "Critical: " + getTemperatureCriticalString(),
+      case 'TEMPERATURE':
+        return <String>[
+          'Current: ' + getTemperatureCurrentString(),
+          'High: ' + getTemperatureHighString(),
+          'Critical: ' + getTemperatureCriticalString(),
         ];
-      case "BATTERY":
-        return [
-          "Percent: " + getBatteryPercentString(),
-          "Time Left: " + getBatterySecsLeftString(),
-          "Power Plugged: " + getBatteryPowerPluggedString(),
+      case 'BATTERY':
+        return <String>[
+          'Percent: ' + getBatteryPercentString(),
+          'Time Left: ' + getBatterySecsLeftString(),
+          'Power Plugged: ' + getBatteryPowerPluggedString(),
         ];
-      case "SYSTEM":
-        return [
-          "Hostname: " + hostname,
-          "OS: " + sysname + " " + machine,
-          "Kernel: " + kernel,
-          "Uptime: " + getUptimeString(),
-          "CPU: " + cpu,
-          "GPU: " + gpu,
+      case 'SYSTEM':
+        return <String>[
+          'Hostname: ' + hostname,
+          'OS: ' + sysname + ' ' + machine,
+          'Kernel: ' + kernel,
+          'Uptime: ' + getUptimeString(),
+          'CPU: ' + cpu,
+          'GPU: ' + gpu,
         ];
     }
-    return ["ERROR: type " + typeString + " not found!"];
+    return <String>['ERROR: type ' + typeString + ' not found!'];
   }
 
   //Uptime
   String getUptimeString() {
-    if (uptime == 0) return "";
+    if (uptime == 0) {
+      return '';
+    }
     return OwnMath.secondsToHumanString(uptime.toInt());
   }
 
   //CPU
   String getCPUPercentString() {
-    if (cpuPercent == 0) return "";
-    return OwnMath.round(cpuPercent * 100).toString() + "%";
+    if (cpuPercent == 0) {
+      return '';
+    }
+    return OwnMath.round(cpuPercent * 100).toString() + '%';
   }
 
   String getCPUCoresString() {
-    if (cpuCores == 0) return "";
+    if (cpuCores == 0) {
+      return '';
+    }
     return cpuCores.toString();
   }
 
   String getCPUPhysicalCoresString() {
-    if (cpuPhysicalCores == 0) return "";
+    if (cpuPhysicalCores == 0) {
+      return '';
+    }
     return cpuPhysicalCores.toString();
   }
 
   String getCPUCurrentFrequencyString() {
-    if (cpuCurrentFreq == 0) return "";
-    return OwnMath.round(cpuCurrentFreq).toString() + "Hz";
+    if (cpuCurrentFreq == 0) {
+      return '';
+    }
+    return OwnMath.round(cpuCurrentFreq).toString() + 'Hz';
   }
 
   String getCPUMinFrequencyString() {
-    if (cpuMinFreq == 0) return "";
-    return OwnMath.round(cpuMinFreq).toString() + "Hz";
+    if (cpuMinFreq == 0) {
+      return '';
+    }
+    return OwnMath.round(cpuMinFreq).toString() + 'Hz';
   }
 
   String getCPUMaxFrequencyString() {
-    if (cpuMaxFreq == 0) return "";
-    return OwnMath.round(cpuMaxFreq).toString() + "Hz";
+    if (cpuMaxFreq == 0) {
+      return '';
+    }
+    return OwnMath.round(cpuMaxFreq).toString() + 'Hz';
   }
 
   //Battery
   String getBatteryPercentString() {
-    if (batteryPercent == 0) return "";
-    return OwnMath.round(batteryPercent * 100).toString() + "%";
+    if (batteryPercent == 0) {
+      return '';
+    }
+    return OwnMath.round(batteryPercent * 100).toString() + '%';
   }
 
   String getBatterySecsLeftString() {
-    if (batterySecsLeft == 0 && batteryPercent == 0) return "";
+    if (batterySecsLeft == 0 && batteryPercent == 0) {
+      return '';
+    }
     return OwnMath.secondsToHumanString(batterySecsLeft);
   }
 
   String getBatteryPowerPluggedString() {
-    if (batteryPercent == 0) return "";
+    if (batteryPercent == 0) {
+      return '';
+    }
     return batteryPowerPlugged.toString();
   }
 
@@ -335,9 +355,11 @@ class ComputerData {
   }
 
   String getVirtualMemoryPercentString() {
-    double percent = getVirtualMemoryPercent();
-    if (percent == 0) return "";
-    return OwnMath.round(percent * 100).toString() + "%";
+    final double percent = getVirtualMemoryPercent();
+    if (percent == 0) {
+      return '';
+    }
+    return OwnMath.round(percent * 100).toString() + '%';
   }
 
   //SwapMemory
@@ -362,9 +384,11 @@ class ComputerData {
   }
 
   String getSwapMemoryPercentString() {
-    double percent = getSwapMemoryPercent();
-    if (percent == 0 && swapMemoryTotal == 0) return "";
-    return OwnMath.round(percent * 100).toString() + "%";
+    final double percent = getSwapMemoryPercent();
+    if (percent == 0 && swapMemoryTotal == 0) {
+      return '';
+    }
+    return OwnMath.round(percent * 100).toString() + '%';
   }
 
   //Disk
@@ -389,33 +413,43 @@ class ComputerData {
   }
 
   String getDiskUsagePercentString() {
-    double percent = getDiskUsagePercent();
-    if (percent == 0) return "";
-    return OwnMath.round(percent * 100).toString() + "%";
+    final double percent = getDiskUsagePercent();
+    if (percent == 0) {
+      return '';
+    }
+    return OwnMath.round(percent * 100).toString() + '%';
   }
 
   //Temperature
   String getTemperatureCurrentString() {
-    if (temperatureCurrent == 0) return "";
-    return temperatureCurrent.toString() + "°";
+    if (temperatureCurrent == 0) {
+      return '';
+    }
+    return temperatureCurrent.toString() + '°';
   }
 
   String getTemperatureHighString() {
-    if (temperatureHigh == 0) return "";
-    return temperatureHigh.toString() + "°";
+    if (temperatureHigh == 0) {
+      return '';
+    }
+    return temperatureHigh.toString() + '°';
   }
 
   String getTemperatureCriticalString() {
-    if (temperatureCritical == 0) return "";
-    return temperatureCritical.toString() + "°";
+    if (temperatureCritical == 0) {
+      return '';
+    }
+    return temperatureCritical.toString() + '°';
   }
 
   String getTemperatureCompareString() {
-    if (temperatureCurrent == 0) return "";
+    if (temperatureCurrent == 0) {
+      return '';
+    }
     return OwnMath.round(temperatureCurrent).toString() +
-        "/" +
+        '/' +
         OwnMath.round(temperatureHigh).toString() +
-        "°";
+        '°';
   }
 
   double getTemperaturePercent() {

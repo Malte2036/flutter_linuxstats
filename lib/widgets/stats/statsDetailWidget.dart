@@ -4,9 +4,9 @@ import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsHeaderWidget.dart';
 
 class StatsDetailWidget extends StatefulWidget {
-  final String typeString;
-
   StatsDetailWidget(this.typeString);
+
+  final String typeString;
 
   @override
   _StatsDetailWidgetState createState() => _StatsDetailWidgetState();
@@ -15,7 +15,7 @@ class StatsDetailWidget extends StatefulWidget {
 class _StatsDetailWidgetState extends State<StatsDetailWidget> {
   @override
   Widget build(BuildContext context) {
-    List<String> statsDetailList =
+    final List<String> statsDetailList =
         ComputerData.currentComputerData.getStatsDetailList(widget.typeString);
 
     return Card(
@@ -26,7 +26,7 @@ class _StatsDetailWidgetState extends State<StatsDetailWidget> {
         child: Column(
           children: <Widget>[
             StatsHeaderWidget(typeString: widget.typeString),
-            Padding(padding: EdgeInsets.all(5)),
+            const Padding(padding: EdgeInsets.all(5)),
             Row(
               children: <Widget>[
                 Expanded(flex: 10, child: Container()),
@@ -37,14 +37,14 @@ class _StatsDetailWidgetState extends State<StatsDetailWidget> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: statsDetailList.length * 2,
-                    itemBuilder: (context, index) {
+                    itemBuilder: (BuildContext context, int index) {
                       if (index % 2 == 0) {
                         return Text(statsDetailList[index ~/ 2],
                             style: TextStyle(
                               fontSize: ScreenManager.getFontSizeSmall(context),
                             ));
                       } else {
-                        return Padding(padding: EdgeInsets.all(3.5));
+                        return const Padding(padding: EdgeInsets.all(3.5));
                       }
                     },
                   ),
@@ -52,7 +52,7 @@ class _StatsDetailWidgetState extends State<StatsDetailWidget> {
                 Expanded(flex: 5, child: Container()),
               ],
             ),
-            Padding(padding: EdgeInsets.all(7.5)),
+            const Padding(padding: EdgeInsets.all(7.5)),
           ],
         ),
       ),
