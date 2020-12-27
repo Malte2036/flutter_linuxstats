@@ -12,8 +12,8 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class StatsMainScreen extends StatefulWidget {
-  _StatsMainScreenState currentStatsMainScreenState =
-      new _StatsMainScreenState();
+  final _StatsMainScreenState currentStatsMainScreenState =
+      _StatsMainScreenState();
 
   @override
   _StatsMainScreenState createState() => currentStatsMainScreenState;
@@ -29,32 +29,35 @@ class StatsMainScreen extends StatefulWidget {
 
 class _StatsMainScreenState extends State<StatsMainScreen> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      new GlobalKey<RefreshIndicatorState>();
-  Future<Null> _refresh() async {
-    debugPrint("call _refresh()");
+      GlobalKey<RefreshIndicatorState>();
+  Future<void> _refresh() async {
+    debugPrint('call_refresh()');
     setState(() {});
   }
 
-  Future<Null> _manuelRefresh() async {
-    WebsocketCommunication.askForSystemData();
-  }
+  Future<void> _manuelRefresh() async =>
+      WebsocketCommunication.askForSystemData();
 
-  _showConnectionRefusedDialog() {
-    if (Helper.isActiveConnectionRefusedDialog) return;
+  void _showConnectionRefusedDialog() {
+    if (Helper.isActiveConnectionRefusedDialog) {
+      return;
+    }
+
     Helper.isActiveConnectionRefusedDialog = true;
     Helper.flipAllStatsBigWidgetsBack();
-    showDialog(
+    showDialog<AlertDialog>(
       barrierDismissible: false,
       context: context,
-      builder: (_) => AlertDialog(
-        title: Text("Connection refused"),
-        content: Text("Unfortunately, no running Linux server was found..."),
+      builder: (dynamic _) => AlertDialog(
+        title: const Text('Connection refused'),
+        content:
+            const Text('Unfortunately, no running Linux server was found...'),
         actions: <Widget>[
           FlatButton(
-            child: Text("How to use?"),
+            child: const Text('How to use?'),
             onPressed: () async {
-              const url =
-                  "https://github.com/Malte2036/flutter_linuxstats#installation";
+              const String url =
+                  'https://github.com/Malte2036/flutter_linuxstats#installation';
 
               if (await canLaunch(url)) {
                 await launch(url);
@@ -64,7 +67,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
             },
           ),
           FlatButton(
-            child: Text("Reconnect!"),
+            child: const Text('Reconnect!'),
             onPressed: () {
               Navigator.of(context).pop();
               Helper.isActiveConnectionRefusedDialog = false;
@@ -82,7 +85,7 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
       appBar: AppBar(
         title: Text(
           ComputerData.currentComputerData.username +
-              "@" +
+              '@' +
               ComputerData.currentComputerData.hostname,
           style: TextStyle(
               color: OwnTheme.isLightTheme() ? Colors.black : Colors.white),
@@ -92,9 +95,9 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
           Tooltip(
             message: WebsocketCommunication.communicationState ==
                     CommunicationState.CONNECTED
-                ? "CONNECTED"
-                : "DISCONNECTED",
-            waitDuration: Duration(microseconds: 1),
+                ? 'CONNECTED'
+                : 'DISCONNECTED',
+            waitDuration: const Duration(microseconds: 1),
             child: Icon(
               Icons.power_settings_new,
               color: WebsocketCommunication.communicationState ==
@@ -103,16 +106,16 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
                   : OwnColors.redColor,
             ),
           ),
-          Padding(padding: EdgeInsets.only(right: 20)),
+          const Padding(padding: EdgeInsets.only(right: 20)),
         ],
       ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            ListTile(),
+            const ListTile(),
             SwitchListTile(
-              title: Text("Darkmode"),
+              title: const Text('Darkmode'),
               value: !OwnTheme.isLightTheme(),
               onChanged: (bool value) {
                 OwnTheme.switchTheme();
@@ -127,65 +130,66 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
         onRefresh: _manuelRefresh,
         child: ListView(
           primary: true,
-          children: [
+          children: <Widget>[
             GridView.count(
-              physics: ScrollPhysics(),
+              physics: const ScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: ScreenManager.getWidgetCountLine(context),
               childAspectRatio: 1.15,
               children: <Widget>[
                 StatsBigWidget(
-                    "CPU",
+                    'CPU',
                     ComputerData.currentComputerData.getCPUPercentString(),
                     ComputerData.currentComputerData.cpuPercent,
                     OwnColors.percentToColor(
                         ComputerData.currentComputerData.cpuPercent)),
                 StatsBigWidget(
-                    "MEMORY",
+                    'MEMORY',
                     ComputerData.currentComputerData
                         .getVirtualMemoryCompareString(),
                     ComputerData.currentComputerData.getVirtualMemoryPercent(),
                     OwnColors.percentToColor(ComputerData.currentComputerData
                         .getVirtualMemoryPercent())),
                 StatsBigWidget(
-                    "SWAP",
+                    'SWAP',
                     ComputerData.currentComputerData
                         .getSwapMemoryCompareString(),
                     ComputerData.currentComputerData.getSwapMemoryPercent(),
                     OwnColors.percentToColor(ComputerData.currentComputerData
                         .getSwapMemoryPercent())),
                 StatsBigWidget(
-                    "DISK",
+                    'DISK',
                     ComputerData.currentComputerData
                         .getDiskUsageCompareString(),
                     ComputerData.currentComputerData.getDiskUsagePercent(),
                     OwnColors.percentToColor(ComputerData.currentComputerData
                         .getDiskUsagePercent())),
                 StatsBigWidget(
-                    "TEMPERATURE",
+                    'TEMPERATURE',
                     ComputerData.currentComputerData
                         .getTemperatureCompareString(),
                     ComputerData.currentComputerData.getTemperaturePercent(),
                     OwnColors.percentToColor(ComputerData.currentComputerData
                         .getTemperaturePercent())),
                 StatsBigWidget(
-                    "BATTERY",
+                    'BATTERY',
                     ComputerData.currentComputerData.getBatteryPercentString(),
                     ComputerData.currentComputerData.batteryPercent,
                     OwnColors.percentToColor(
                         ComputerData.currentComputerData.batteryPercent,
                         inverted: true)),
                 Container(
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    child: StatsDetailWidget("SYSTEM")),
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    child: StatsDetailWidget('SYSTEM')),
               ],
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: Text("updated " +
-                  new DateFormat("HH:mm:ss")
+              child: Text('updated ' +
+                  DateFormat('HH:mm:ss')
                       .format(ComputerData.currentComputerData.updated) +
-                  "  "),
+                  '  '),
             ),
           ],
         ),

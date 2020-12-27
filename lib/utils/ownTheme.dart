@@ -5,21 +5,21 @@ import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownColors.dart';
 
 class OwnTheme with ChangeNotifier {
-  static OwnTheme currentOwnTheme = new OwnTheme();
+  static OwnTheme currentOwnTheme = OwnTheme();
 
-  bool _isLightTheme = Helper.prefs.containsKey("isLightTheme")
-      ? Helper.prefs.getBool("isLightTheme")
+  bool _isLightTheme = Helper.prefs.containsKey('isLightTheme')
+      ? Helper.prefs.getBool('isLightTheme')
       : false;
 
   static final ThemeData lightTheme = ThemeData(
     fontFamily: 'RobotoMono',
     brightness: Brightness.light,
     backgroundColor: Colors.white,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       elevation: 7.5,
       color: Colors.white,
     ),
-    primaryIconTheme: IconThemeData(color: Colors.black),
+    primaryIconTheme: const IconThemeData(color: Colors.black),
     cardColor: Colors.white70,
     accentColor: OwnColors.greenColor,
   );
@@ -27,10 +27,10 @@ class OwnTheme with ChangeNotifier {
   static final ThemeData darkTheme = ThemeData(
     fontFamily: 'RobotoMono',
     brightness: Brightness.dark,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       elevation: 7.5,
     ),
-    cardColor: Color.fromRGBO(0, 0, 0, 0.25),
+    cardColor: const Color.fromRGBO(0, 0, 0, 0.25),
     accentColor: OwnColors.greenColor,
   );
 
@@ -50,6 +50,6 @@ class OwnTheme with ChangeNotifier {
     currentOwnTheme._isLightTheme = !isLightTheme();
     currentOwnTheme.notifyListeners();
 
-    Helper.prefs.setBool("isLightTheme", isLightTheme());
+    Helper.prefs.setBool('isLightTheme', isLightTheme());
   }
 }

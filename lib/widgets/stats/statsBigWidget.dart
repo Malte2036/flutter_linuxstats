@@ -10,12 +10,12 @@ import 'package:flutter_linuxstats/widgets/stats/statsDetailWidget.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsHeaderWidget.dart';
 
 class StatsBigWidget extends StatefulWidget {
+  StatsBigWidget(this.typeString, this.countString, this.percent, this.color);
+
   final String typeString;
   final String countString;
   final double percent;
   final Color color;
-
-  StatsBigWidget(this.typeString, this.countString, this.percent, this.color);
 
   @override
   _StatsBigWidgetState createState() => _StatsBigWidgetState();
@@ -33,7 +33,7 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: FlipCard(
         flipOnTouch: WebsocketCommunication.communicationState ==
             CommunicationState.CONNECTED,
@@ -54,11 +54,11 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
                   Container(
                     width: ScreenManager.getQuadratObjectSize(context),
                     height: ScreenManager.getQuadratObjectSize(context) * 0.75,
-                    child: FutureBuilder(
-                      future: Future.delayed(Duration(milliseconds: 500), () {
+                    child: FutureBuilder<bool>(
+                      future: Future<bool>.delayed(const Duration(milliseconds: 500), () {
                         return true;
                       }),
-                      builder: (context, snapshot) {
+                      builder: (BuildContext context, dynamic snapshot) {
                         if (snapshot.hasData) {
                           return Stack(
                             children: <Widget>[
@@ -67,19 +67,11 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
                                 OwnTheme.getCurrentThemeData()
                                     .scaffoldBackgroundColor,
                                 animate: false,
-                                arcWidth: (ScreenManager.getQuadratObjectSize(
-                                            context) *
-                                        0.1)
-                                    .toInt(),
                               ),
                               HalfGaugeChart.fromPercent(
                                 widget.percent,
                                 widget.color,
                                 animate: true,
-                                arcWidth: (ScreenManager.getQuadratObjectSize(
-                                            context) *
-                                        0.075)
-                                    .toInt(),
                               ),
                               Column(
                                 children: <Widget>[

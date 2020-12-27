@@ -3,11 +3,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_linuxstats/screens/statsMainScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Helper {
+mixin Helper {
   static StatsMainScreen currentStatsMainScreen;
   static bool isActiveConnectionRefusedDialog = false;
   static Map<String, GlobalKey<FlipCardState>> allStatsBigWidgetFlipKeyMap =
-      new Map<String, GlobalKey<FlipCardState>>();
+      <String, GlobalKey<FlipCardState>>{};
 
   static SharedPreferences prefs;
 
@@ -16,12 +16,14 @@ class Helper {
     if (!allStatsBigWidgetFlipKeyMap.containsKey(typeString)) {
       allStatsBigWidgetFlipKeyMap.putIfAbsent(typeString, () => flipKey);
     } else {
-      allStatsBigWidgetFlipKeyMap.update(typeString, (value) => flipKey);
+      allStatsBigWidgetFlipKeyMap.update(
+          typeString, (GlobalKey<FlipCardState> value) => flipKey);
     }
   }
 
-  static flipAllStatsBigWidgetsBack({String except}) {
-    allStatsBigWidgetFlipKeyMap.forEach((key, value) {
+  static void flipAllStatsBigWidgetsBack({String except}) {
+    allStatsBigWidgetFlipKeyMap
+        .forEach((String key, GlobalKey<FlipCardState> value) {
       if (key != except) {
         if (!value.currentState.isFront) {
           value.currentState.toggleCard();
