@@ -55,7 +55,8 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
                     width: ScreenManager.getQuadratObjectSize(context),
                     height: ScreenManager.getQuadratObjectSize(context) * 0.75,
                     child: FutureBuilder<bool>(
-                      future: Future<bool>.delayed(const Duration(milliseconds: 500), () {
+                      future: Future<bool>.delayed(
+                          const Duration(milliseconds: 500), () {
                         return true;
                       }),
                       builder: (BuildContext context, dynamic snapshot) {

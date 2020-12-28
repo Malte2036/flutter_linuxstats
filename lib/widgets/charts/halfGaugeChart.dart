@@ -11,11 +11,8 @@ class HalfGaugeChart extends StatelessWidget {
 
   factory HalfGaugeChart.fromPercent(double percent, Color color,
       {bool animate}) {
-    return HalfGaugeChart(
-      _createPercentData(percent, color),
-      percent: percent,
-      animate: animate
-    );
+    return HalfGaugeChart(_createPercentData(percent, color),
+        percent: percent, animate: animate);
   }
 
   final List<charts.Series<GaugeSegment, String>> seriesList;
