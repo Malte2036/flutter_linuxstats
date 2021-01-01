@@ -226,6 +226,7 @@ class ComputerData {
     switch (typeString.toUpperCase()) {
       case 'CPU':
         return <String>[
+          'Name: ' + cpu,
           'Cores: ' + getCPUCoresString(),
           'Physical Cores: ' + getCPUPhysicalCoresString(),
           'Current Frequency: ' + getCPUCurrentFrequencyString(),
