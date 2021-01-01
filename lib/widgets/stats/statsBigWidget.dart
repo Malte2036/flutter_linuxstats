@@ -36,7 +36,7 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: FlipCard(
         flipOnTouch: WebsocketCommunication.communicationState ==
-            CommunicationState.CONNECTED,
+            CommunicationState.CONNECTED && widget.countString.isNotEmpty,
         onFlip: () {
           Helper.flipAllStatsBigWidgetsBack(except: widget.typeString);
         },
