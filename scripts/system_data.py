@@ -24,7 +24,7 @@ cpuMaxFreq = getattr(psutil.cpu_freq(), 'max')
 gpus = GPUtil.getGPUs()
 gpu = None
 gpuName = ""
-if len(gpus) is not 0:
+if len(gpus) != 0:
     gpu = gpus[0]
     gpuName = gpu.name
 
@@ -49,6 +49,18 @@ def getData():
         batteryPercent = getattr(sensorsBattery, 'percent')
         batterySecsLeft = getattr(sensorsBattery, 'secsleft')
         batteryPowerPlugged=  getattr(sensorsBattery, 'power_plugged')
+    
+    gpuLoad = ""
+    gpuTemperature = ""
+    gpuMemoryTotal = ""
+    gpuMemoryUsed = ""
+    gpuMemoryFree = ""
+    if gpu is not None:
+        gpuLoad = gpu.load
+        gpuTemperature = gpu.temperature
+        gpuMemoryTotal = int(gpu.memoryTotal) * 1000000
+        gpuMemoryUsed = int(gpu.memoryUsed) * 1000000
+        gpuMemoryFree = int(gpu.memoryFree) * 1000000
 
     virtualMemory = psutil.virtual_memory()
     swapMemory = psutil.swap_memory()
@@ -67,7 +79,6 @@ def getData():
             'kernel': kernel,
             'uptime': time.time() - boottime,
             'cpu': cpu,
-            'gpuName': gpuName,
             
             'cpuPercent': psutil.cpu_percent(),
             'cpuCores': cpuCores,
@@ -75,6 +86,13 @@ def getData():
             'cpuCurrentFreq': getattr(psutil.cpu_freq(), 'current'),
             'cpuMinFreq': cpuMinFreq,
             'cpuMaxFreq': cpuMaxFreq,
+
+            'gpuName': gpuName,
+            'gpuLoad': gpuLoad,
+            'gpuTemperature': gpuTemperature,
+            'gpuMemoryTotal': gpuMemoryTotal,
+            'gpuMemoryUsed': gpuMemoryUsed,
+            'gpuMemoryFree': gpuMemoryFree,
             
             'batteryPercent': batteryPercent,
             'batterySecsLeft': batterySecsLeft,
@@ -108,6 +126,16 @@ def getDetailData():
         batteryPercent = getattr(sensorsBattery, 'percent')
         batterySecsLeft = getattr(sensorsBattery, 'secsleft')
         batteryPowerPlugged=  getattr(sensorsBattery, 'power_plugged')
+    
+    gpuLoad = ""
+    gpuTemperature = ""
+    gpuMemoryUsed = ""
+    gpuMemoryFree = ""
+    if gpu is not None:
+        gpuLoad = gpu.load
+        gpuTemperature = gpu.temperature
+        gpuMemoryUsed = int(gpu.memoryUsed) * 1000000
+        gpuMemoryFree = int(gpu.memoryFree) * 1000000
 
     virtualMemory = psutil.virtual_memory()
     swapMemory = psutil.swap_memory()
@@ -123,6 +151,11 @@ def getDetailData():
             
             'cpuPercent': psutil.cpu_percent(),
             'cpuCurrentFreq':  getattr(psutil.cpu_freq(), 'current'),
+            
+            'gpuLoad': gpuLoad,
+            'gpuTemperature': gpuTemperature,
+            'gpuMemoryUsed': gpuMemoryUsed,
+            'gpuMemoryFree': gpuMemoryFree,
             
             'batteryPercent': batteryPercent,
             'batterySecsLeft': batterySecsLeft,

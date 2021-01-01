@@ -10,13 +10,18 @@ class ComputerData {
       this.kernel,
       this.uptime,
       this.cpu,
-      this.gpuName,
       this.cpuPercent,
       this.cpuCores,
       this.cpuPhysicalCores,
       this.cpuCurrentFreq,
       this.cpuMinFreq,
       this.cpuMaxFreq,
+      this.gpuName,
+      this.gpuLoad,
+      this.gpuTemperature,
+      this.gpuMemoryTotal,
+      this.gpuMemoryUsed,
+      this.gpuMemoryFree,
       this.batteryPercent,
       this.batterySecsLeft,
       this.batteryPowerPlugged,
@@ -43,13 +48,18 @@ class ComputerData {
       kernel: '',
       uptime: 0,
       cpu: '',
-      gpuName: '',
       cpuPercent: 0,
       cpuCores: 0,
       cpuPhysicalCores: 0,
       cpuCurrentFreq: 0,
       cpuMinFreq: 0,
       cpuMaxFreq: 0,
+      gpuName: '',
+      gpuLoad: 0.0,
+      gpuTemperature: 0.0,
+      gpuMemoryTotal: 0,
+      gpuMemoryUsed: 0,
+      gpuMemoryFree: 0,
       batteryPercent: 0,
       batterySecsLeft: 0,
       batteryPowerPlugged: false,
@@ -90,9 +100,6 @@ class ComputerData {
       cpu: json.containsKey('cpu')
           ? json['cpu'].toString()
           : currentComputerData.cpu,
-      gpuName: json.containsKey('gpuName')
-          ? json['gpuName'].toString()
-          : currentComputerData.gpuName,
       cpuPercent:
           json.containsKey('cpuPercent') ? json['cpuPercent'] / 100.0 : 0,
       cpuCores: json.containsKey('cpuCores')
@@ -108,6 +115,18 @@ class ComputerData {
       cpuMaxFreq: json.containsKey('cpuMaxFreq')
           ? json['cpuMaxFreq']
           : currentComputerData.cpuMaxFreq,
+      gpuName: json.containsKey('gpuName')
+          ? json['gpuName'].toString()
+          : currentComputerData.gpuName,
+      gpuLoad: json.containsKey('gpuLoad') ? json['gpuLoad'] : 0.0,
+      gpuTemperature:
+          json.containsKey('gpuTemperature') ? json['gpuTemperature'] : 0.0,
+      gpuMemoryTotal:
+          json.containsKey('gpuMemoryTotal') ? json['gpuMemoryTotal'] : 0,
+      gpuMemoryUsed:
+          json.containsKey('gpuMemoryUsed') ? json['gpuMemoryUsed'] : 0,
+      gpuMemoryFree:
+          json.containsKey('gpuMemoryFree') ? json['gpuMemoryFree'] : 0,
       batteryPercent: json.containsKey('batteryPercent')
           ? json['batteryPercent'] / 100.0
           : 0,
@@ -162,7 +181,6 @@ class ComputerData {
   final String kernel;
   final double uptime;
   final String cpu;
-  final String gpuName;
 
   final double cpuPercent;
   final int cpuCores;
@@ -170,6 +188,13 @@ class ComputerData {
   final double cpuCurrentFreq;
   final double cpuMinFreq;
   final double cpuMaxFreq;
+
+  final String gpuName;
+  final double gpuLoad;
+  final double gpuTemperature;
+  final int gpuMemoryTotal;
+  final int gpuMemoryUsed;
+  final int gpuMemoryFree;
 
   final double batteryPercent;
   final int batterySecsLeft;
@@ -207,6 +232,15 @@ class ComputerData {
           'Min Frequency: ' + getCPUMinFrequencyString(),
           'Max Frequency: ' + getCPUMaxFrequencyString(),
           'Percent: ' + getCPUPercentString(),
+        ];
+      case 'GPU':
+        return <String>[
+          'Name: ' + gpuName,
+          'Load: ' + getGPULoadPercentString(),
+          'Memory Total: ' + getGPUMemoryTotalString(),
+          'Memory Used: ' + getGPUMemoryUsedString(),
+          'Memory Free: ' + getGPUMemoryFreeString(),
+          'Temperature: ' + getGPUTemperatureString(),
         ];
       case 'MEMORY':
         return <String>[
@@ -304,6 +338,33 @@ class ComputerData {
       return '';
     }
     return OwnMath.round(cpuMaxFreq).toString() + 'Hz';
+  }
+
+  //GPU
+  String getGPULoadPercentString() {
+    if (gpuLoad == 0.0) {
+      return '';
+    }
+    return OwnMath.round(gpuLoad * 100).toString() + '%';
+  }
+
+  String getGPUTemperatureString() {
+    if (gpuTemperature == 0) {
+      return '';
+    }
+    return gpuTemperature.toString() + '°';
+  }
+
+  String getGPUMemoryTotalString() {
+    return OwnMath.bytesToHumanString(gpuMemoryTotal);
+  }
+
+  String getGPUMemoryUsedString() {
+    return OwnMath.bytesToHumanString(gpuMemoryUsed);
+  }
+
+  String getGPUMemoryFreeString() {
+    return OwnMath.bytesToHumanString(gpuMemoryFree);
   }
 
   //Battery

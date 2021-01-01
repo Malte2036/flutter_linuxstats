@@ -144,6 +144,12 @@ class _StatsMainScreenState extends State<StatsMainScreen> {
                     OwnColors.percentToColor(
                         ComputerData.currentComputerData.cpuPercent)),
                 StatsBigWidget(
+                    'GPU',
+                    ComputerData.currentComputerData.getGPULoadPercentString(),
+                    ComputerData.currentComputerData.gpuLoad,
+                    OwnColors.percentToColor(
+                        ComputerData.currentComputerData.gpuLoad)),
+                StatsBigWidget(
                     'MEMORY',
                     ComputerData.currentComputerData
                         .getVirtualMemoryCompareString(),
