@@ -10,7 +10,7 @@ class ComputerData {
       this.kernel,
       this.uptime,
       this.cpu,
-      this.gpu,
+      this.gpuName,
       this.cpuPercent,
       this.cpuCores,
       this.cpuPhysicalCores,
@@ -43,7 +43,7 @@ class ComputerData {
       kernel: '',
       uptime: 0,
       cpu: '',
-      gpu: '',
+      gpuName: '',
       cpuPercent: 0,
       cpuCores: 0,
       cpuPhysicalCores: 0,
@@ -90,9 +90,9 @@ class ComputerData {
       cpu: json.containsKey('cpu')
           ? json['cpu'].toString()
           : currentComputerData.cpu,
-      gpu: json.containsKey('gpu')
-          ? json['gpu'].toString()
-          : currentComputerData.gpu,
+      gpuName: json.containsKey('gpuName')
+          ? json['gpuName'].toString()
+          : currentComputerData.gpuName,
       cpuPercent:
           json.containsKey('cpuPercent') ? json['cpuPercent'] / 100.0 : 0,
       cpuCores: json.containsKey('cpuCores')
@@ -162,7 +162,7 @@ class ComputerData {
   final String kernel;
   final double uptime;
   final String cpu;
-  final String gpu;
+  final String gpuName;
 
   final double cpuPercent;
   final int cpuCores;
@@ -249,7 +249,7 @@ class ComputerData {
           'Kernel: ' + kernel,
           'Uptime: ' + getUptimeString(),
           'CPU: ' + cpu,
-          'GPU: ' + gpu,
+          'GPU: ' + gpuName,
         ];
     }
     return <String>['ERROR: type ' + typeString + ' not found!'];

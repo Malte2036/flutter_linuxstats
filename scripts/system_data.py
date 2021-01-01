@@ -1,5 +1,6 @@
 import psutil
 import cpuinfo
+import GPUtil
 import os
 import time
 import json
@@ -19,6 +20,13 @@ cpuCores = psutil.cpu_count()
 cpuPhysicalCores = psutil.cpu_count(logical=False)
 cpuMinFreq = getattr(psutil.cpu_freq(), 'min')
 cpuMaxFreq = getattr(psutil.cpu_freq(), 'max')
+
+gpus = GPUtil.getGPUs()
+gpu = None
+gpuName = ""
+if len(gpus) is not 0:
+    gpu = gpus[0]
+    gpuName = gpu.name
 
 virtualMemoryTotal = getattr(psutil.virtual_memory(), 'total')
 
@@ -59,6 +67,7 @@ def getData():
             'kernel': kernel,
             'uptime': time.time() - boottime,
             'cpu': cpu,
+            'gpuName': gpuName,
             
             'cpuPercent': psutil.cpu_percent(),
             'cpuCores': cpuCores,
