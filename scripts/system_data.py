@@ -64,6 +64,10 @@ def getData():
         gpuMemoryFree = int(gpu.memoryFree) * 1000000
 
     virtualMemory = psutil.virtual_memory()
+    virtualMemoryCached = ""
+    if hasattr(virtualMemory, 'cached'):
+        virtualMemoryCached = virtualMemory.cached
+        
     swapMemory = psutil.swap_memory()
     diskUsage = psutil.disk_usage("/")
 
@@ -102,7 +106,7 @@ def getData():
             'virtualMemoryTotal': virtualMemoryTotal,
             'virtualMemoryUsed': virtualMemory.used,
             'virtualMemoryFree': virtualMemory.free,
-            'virtualMemoryCached': virtualMemory.cached,
+            'virtualMemoryCached': virtualMemoryCached,
 
             'swapMemoryTotal': swapMemoryTotal,
             'swapMemoryUsed': swapMemory.used,
@@ -140,6 +144,10 @@ def getDetailData():
         gpuMemoryFree = int(gpu.memoryFree) * 1000000
 
     virtualMemory = psutil.virtual_memory()
+    virtualMemoryCached = ""
+    if hasattr(virtualMemory, 'cached'):
+        virtualMemoryCached = virtualMemory.cached
+    
     swapMemory = psutil.swap_memory()
     diskUsage = psutil.disk_usage("/")
 
@@ -165,7 +173,7 @@ def getDetailData():
 
             'virtualMemoryUsed': virtualMemory.used,
             'virtualMemoryFree': virtualMemory.free,
-            'virtualMemoryCached': virtualMemory.cached,
+            'virtualMemoryCached': virtualMemoryCached,
 
             'swapMemoryUsed': swapMemory.used,
             'swapMemoryFree': swapMemory.free,
