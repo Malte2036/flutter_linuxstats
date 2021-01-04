@@ -1,3 +1,4 @@
+import platform
 import psutil
 import cpuinfo
 import GPUtil
@@ -5,22 +6,21 @@ import os
 import time
 import json
 
-uname = os.uname()
+uname = platform.uname()
 
 username = os.getlogin()
-hostname = getattr(uname, 'nodename')
-sysname = getattr(uname, 'sysname')
-machine = getattr(uname, 'machine')
-kernel = getattr(uname, 'release')
+hostname = uname.node
+sysname = uname.system
+machine = uname.machine
+kernel = uname.release
 cpu = cpuinfo.get_cpu_info()['brand_raw']
 
 boottime = psutil.boot_time()
 
 cpuCores = psutil.cpu_count()
 cpuPhysicalCores = psutil.cpu_count(logical=False)
-cpuMinFreq = getattr(psutil.cpu_freq(), 'min')
-cpuMaxFreq = getattr(psutil.cpu_freq(), 'max')
-
+cpuMinFreq = psutil.cpu_freq().min
+cpuMaxFreq = psutil.cpu_freq().max
 gpus = GPUtil.getGPUs()
 gpu = None
 gpuName = ""
@@ -28,17 +28,18 @@ if len(gpus) != 0:
     gpu = gpus[0]
     gpuName = gpu.name
 
-virtualMemoryTotal = getattr(psutil.virtual_memory(), 'total')
+virtualMemoryTotal = psutil.virtual_memory().total
 
-swapMemoryTotal = getattr(psutil.swap_memory(), 'total')
+swapMemoryTotal = psutil.swap_memory().total
 
-diskUsageTotal = getattr(psutil.disk_usage("/"), 'total')
+diskUsageTotal = psutil.disk_usage("/").total
 
 temperatureHigh = 0.0
 temperatureCritical = 0.0
-if psutil.sensors_temperatures().get("acpitz") is not None:
-    temperatureHigh =  getattr(psutil.sensors_temperatures()['acpitz'][0], 'high')
-    temperatureCritical =  getattr(psutil.sensors_temperatures()['acpitz'][0], 'critical')
+if psutil.sensors_temperatures() is not None and psutil.sensors_temperatures().get("acpitz") is not None:
+    temperatureHigh = psutil.sensors_temperatures()['acpitz'][0].high
+    temperatureCritical = psutil.sensors_temperatures()['acpitz'][0].critical
+
 
 def getData():
     sensorsBattery = psutil.sensors_battery()
@@ -46,10 +47,10 @@ def getData():
     batterySecsLeft = 0
     batteryPowerPlugged = True
     if sensorsBattery is not None:
-        batteryPercent = getattr(sensorsBattery, 'percent')
-        batterySecsLeft = getattr(sensorsBattery, 'secsleft')
-        batteryPowerPlugged=  getattr(sensorsBattery, 'power_plugged')
-    
+        batteryPercent = sensorsBattery.percent
+        batterySecsLeft = sensorsBattery.secsleft
+        batteryPowerPlugged = sensorsBattery.power_plugged
+
     gpuLoad = ""
     gpuTemperature = ""
     gpuMemoryTotal = ""
@@ -67,8 +68,8 @@ def getData():
     diskUsage = psutil.disk_usage("/")
 
     temperatureCurrent = 0.0
-    if psutil.sensors_temperatures().get("acpitz") is not None:
-        temperatureCurrent =  getattr(psutil.sensors_temperatures()['acpitz'][0], 'current')
+    if psutil.sensors_temperatures() is not None and psutil.sensors_temperatures().get("acpitz") is not None:
+        temperatureCurrent = psutil.sensors_temperatures()['acpitz'][0].current
 
     return json.dumps(
         {
@@ -79,11 +80,11 @@ def getData():
             'kernel': kernel,
             'uptime': time.time() - boottime,
             'cpu': cpu,
-            
+
             'cpuPercent': psutil.cpu_percent(),
             'cpuCores': cpuCores,
             'cpuPhysicalCores': cpuPhysicalCores,
-            'cpuCurrentFreq': getattr(psutil.cpu_freq(), 'current'),
+            'cpuCurrentFreq': psutil.cpu_freq().current,
             'cpuMinFreq': cpuMinFreq,
             'cpuMaxFreq': cpuMaxFreq,
 
@@ -93,23 +94,23 @@ def getData():
             'gpuMemoryTotal': gpuMemoryTotal,
             'gpuMemoryUsed': gpuMemoryUsed,
             'gpuMemoryFree': gpuMemoryFree,
-            
+
             'batteryPercent': batteryPercent,
             'batterySecsLeft': batterySecsLeft,
             'batteryPowerPlugged': batteryPowerPlugged,
-            
+
             'virtualMemoryTotal': virtualMemoryTotal,
-            'virtualMemoryUsed': getattr(virtualMemory, 'used'),
-            'virtualMemoryFree': getattr(virtualMemory, 'free'),
-            'virtualMemoryCached': getattr(virtualMemory, 'cached'),
-            
+            'virtualMemoryUsed': virtualMemory.used,
+            'virtualMemoryFree': virtualMemory.free,
+            'virtualMemoryCached': virtualMemory.cached,
+
             'swapMemoryTotal': swapMemoryTotal,
-            'swapMemoryUsed': getattr(swapMemory, 'used'),
-            'swapMemoryFree': getattr(swapMemory, 'free'),
-            
+            'swapMemoryUsed': swapMemory.used,
+            'swapMemoryFree': swapMemory.free,
+
             'diskUsageTotal': diskUsageTotal,
-            'diskUsageUsed': getattr(diskUsage, 'used'),
-            'diskUsageFree': getattr(diskUsage, 'free'),
+            'diskUsageUsed': diskUsage.used,
+            'diskUsageFree': diskUsage.free,
 
             'temperatureCurrent': temperatureCurrent,
             'temperatureHigh': temperatureHigh,
@@ -117,16 +118,17 @@ def getData():
         }
     )
 
+
 def getDetailData():
     sensorsBattery = psutil.sensors_battery()
     batteryPercent = 0.0
     batterySecsLeft = 0
     batteryPowerPlugged = True
     if sensorsBattery is not None:
-        batteryPercent = getattr(sensorsBattery, 'percent')
-        batterySecsLeft = getattr(sensorsBattery, 'secsleft')
-        batteryPowerPlugged=  getattr(sensorsBattery, 'power_plugged')
-    
+        batteryPercent = sensorsBattery.percent
+        batterySecsLeft = sensorsBattery.secsleft
+        batteryPowerPlugged = sensorsBattery.power_plugged
+
     gpuLoad = ""
     gpuTemperature = ""
     gpuMemoryUsed = ""
@@ -142,34 +144,34 @@ def getDetailData():
     diskUsage = psutil.disk_usage("/")
 
     temperatureCurrent = 0.0
-    if psutil.sensors_temperatures().get("acpitz") is not None:
-        temperatureCurrent =  getattr(psutil.sensors_temperatures()['acpitz'][0], 'current')
+    if psutil.sensors_temperatures() is not None and psutil.sensors_temperatures().get("acpitz") is not None:
+        temperatureCurrent = psutil.sensors_temperatures()['acpitz'][0].current
 
     return json.dumps(
         {
             'uptime': time.time() - boottime,
-            
+
             'cpuPercent': psutil.cpu_percent(),
-            'cpuCurrentFreq':  getattr(psutil.cpu_freq(), 'current'),
-            
+            'cpuCurrentFreq':  psutil.cpu_freq().current,
+
             'gpuLoad': gpuLoad,
             'gpuTemperature': gpuTemperature,
             'gpuMemoryUsed': gpuMemoryUsed,
             'gpuMemoryFree': gpuMemoryFree,
-            
+
             'batteryPercent': batteryPercent,
             'batterySecsLeft': batterySecsLeft,
             'batteryPowerPlugged': batteryPowerPlugged,
-            
-            'virtualMemoryUsed': getattr(virtualMemory, 'used'),
-            'virtualMemoryFree': getattr(virtualMemory, 'free'),
-            'virtualMemoryCached': getattr(virtualMemory, 'cached'),
 
-            'swapMemoryUsed': getattr(swapMemory, 'used'),
-            'swapMemoryFree': getattr(swapMemory, 'free'),
-            
-            'diskUsageUsed': getattr(diskUsage, 'used'),
-            'diskUsageFree': getattr(diskUsage, 'free'),
+            'virtualMemoryUsed': virtualMemory.used,
+            'virtualMemoryFree': virtualMemory.free,
+            'virtualMemoryCached': virtualMemory.cached,
+
+            'swapMemoryUsed': swapMemory.used,
+            'swapMemoryFree': swapMemory.free,
+
+            'diskUsageUsed': diskUsage.used,
+            'diskUsageFree': diskUsage.free,
 
             'temperatureCurrent': temperatureCurrent,
         }
