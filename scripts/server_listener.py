@@ -1,7 +1,7 @@
 import asyncio
 import time
 import websockets
-import daemon
+import platform
 from termcolor import colored
 
 import system_data
@@ -44,5 +44,9 @@ print('to cancel this process:')
 print('get the pid with: ' + colored('ps axuw | grep server_listener.py', 'cyan'))
 print('run: ' + colored('kill <pid>', 'cyan'))
 
-with daemon.DaemonContext():
+if platform.uname().system == "Linux":
+    import daemon
+    with daemon.DaemonContext():
+        run_daemon()
+else:
     run_daemon()

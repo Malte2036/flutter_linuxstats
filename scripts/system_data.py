@@ -36,7 +36,7 @@ diskUsageTotal = psutil.disk_usage("/").total
 
 temperatureHigh = 0.0
 temperatureCritical = 0.0
-if psutil.sensors_temperatures() is not None and psutil.sensors_temperatures().get("acpitz") is not None:
+if hasattr(psutil, 'sensors_temperatures') and psutil.sensors_temperatures().get("acpitz") is not None:
     temperatureHigh = psutil.sensors_temperatures()['acpitz'][0].high
     temperatureCritical = psutil.sensors_temperatures()['acpitz'][0].critical
 
@@ -68,7 +68,7 @@ def getData():
     diskUsage = psutil.disk_usage("/")
 
     temperatureCurrent = 0.0
-    if psutil.sensors_temperatures() is not None and psutil.sensors_temperatures().get("acpitz") is not None:
+    if hasattr(psutil, 'sensors_temperatures') and psutil.sensors_temperatures().get("acpitz") is not None:
         temperatureCurrent = psutil.sensors_temperatures()['acpitz'][0].current
 
     return json.dumps(
@@ -144,7 +144,7 @@ def getDetailData():
     diskUsage = psutil.disk_usage("/")
 
     temperatureCurrent = 0.0
-    if psutil.sensors_temperatures() is not None and psutil.sensors_temperatures().get("acpitz") is not None:
+    if hasattr(psutil, 'sensors_temperatures') and psutil.sensors_temperatures().get("acpitz") is not None:
         temperatureCurrent = psutil.sensors_temperatures()['acpitz'][0].current
 
     return json.dumps(
