@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter_linuxstats/communication/communicationState.dart';
 import 'package:flutter_linuxstats/communication/websocketCommunication.dart';
+import 'package:flutter_linuxstats/data/computerData.dart';
 import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownTheme.dart';
 import 'package:flutter_linuxstats/utils/screenManager.dart';
@@ -10,8 +11,10 @@ import 'package:flutter_linuxstats/widgets/stats/statsDetailWidget.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsHeaderWidget.dart';
 
 class StatsBigWidget extends StatefulWidget {
-  StatsBigWidget(this.typeString, this.countString, this.percent, this.color);
+  StatsBigWidget(this.computerData, this.typeString, this.countString,
+      this.percent, this.color);
 
+  final ComputerData computerData;
   final String typeString;
   final String countString;
   final double percent;
@@ -36,7 +39,8 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       child: FlipCard(
         flipOnTouch: WebsocketCommunication.communicationState ==
-            CommunicationState.CONNECTED && widget.countString.isNotEmpty,
+                CommunicationState.CONNECTED &&
+            widget.countString.isNotEmpty,
         onFlip: () {
           Helper.flipAllStatsBigWidgetsBack(except: widget.typeString);
         },
@@ -107,7 +111,7 @@ class _StatsBigWidgetState extends State<StatsBigWidget> {
         ),
         back: IgnorePointer(
           ignoring: true,
-          child: StatsDetailWidget(widget.typeString),
+          child: StatsDetailWidget(widget.computerData, widget.typeString),
         ),
       ),
     );

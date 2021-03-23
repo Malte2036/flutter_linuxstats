@@ -1,4 +1,4 @@
-import 'package:flutter_linuxstats/utils/helper.dart';
+import 'package:flutter_linuxstats/data/computerDataManager.dart';
 import 'package:flutter_linuxstats/utils/ownMath.dart';
 
 class ComputerData {
@@ -80,6 +80,8 @@ class ComputerData {
   }
 
   factory ComputerData.fromJson(Map<String, dynamic> json) {
+    final ComputerData currentComputerData = ComputerDataManager.computerData;
+
     return ComputerData(
       username: json.containsKey('username')
           ? json['username'].toString()
@@ -170,8 +172,6 @@ class ComputerData {
     );
   }
 
-  static ComputerData currentComputerData = ComputerData.emptyData();
-
   final DateTime updated = DateTime.now();
 
   final String username;
@@ -216,11 +216,6 @@ class ComputerData {
   final double temperatureCurrent;
   final double temperatureHigh;
   final double temperatureCritical;
-
-  static void setCurrentComputerData(ComputerData newComputerData) {
-    currentComputerData = newComputerData;
-    Helper.currentStatsMainScreen.refresh();
-  }
 
   List<String> getStatsDetailList(String typeString) {
     switch (typeString.toUpperCase()) {

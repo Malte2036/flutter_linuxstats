@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_linuxstats/communication/communicationState.dart';
 import 'package:flutter_linuxstats/data/computerData.dart';
-import 'package:flutter_linuxstats/utils/helper.dart';
+import 'package:flutter_linuxstats/data/computerDataManager.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:wifi/wifi.dart';
 import 'package:ping_discover_network/ping_discover_network.dart';
@@ -24,14 +24,10 @@ class WebsocketCommunication {
   Timer timer;
 
   Future<void> connect() async {
-    if (Helper.isActiveConnectionRefusedDialog) {
-      return;
-    }
     final String ipString = await getIPString(port);
     if (ipString.isEmpty) {
       communicationState = CommunicationState.DISCONNECTED;
-      ComputerData.setCurrentComputerData(ComputerData.emptyData());
-      Helper.currentStatsMainScreen.showConnectionRefusedDialog();
+      ComputerDataManager.addComputerData(null);
       return;
     }
     final String url = 'ws://' + ipString + ':' + port.toString();
@@ -47,15 +43,13 @@ class WebsocketCommunication {
       debugPrint('got data: ' + data.toString());
       final ComputerData computerData =
           ComputerData.fromJson(json.decode(data));
-      ComputerData.setCurrentComputerData(computerData);
+      ComputerDataManager.addComputerData(computerData);
     }, onDone: () {
       communicationState = CommunicationState.DISCONNECTED;
-      ComputerData.setCurrentComputerData(ComputerData.emptyData());
-      Helper.currentStatsMainScreen.showConnectionRefusedDialog();
+      ComputerDataManager.addComputerData(null);
     }, onError: (dynamic e) {
       communicationState = CommunicationState.DISCONNECTED;
-      ComputerData.setCurrentComputerData(ComputerData.emptyData());
-      Helper.currentStatsMainScreen.showConnectionRefusedDialog();
+      ComputerDataManager.addComputerData(null);
     }, cancelOnError: true);
 
     currentWebsocketCommunication.channel.sink.add('getSystemData()');

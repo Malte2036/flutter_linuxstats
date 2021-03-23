@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 mixin Helper {
   static StatsMainScreen currentStatsMainScreen;
-  static bool isActiveConnectionRefusedDialog = false;
   static Map<String, GlobalKey<FlipCardState>> allStatsBigWidgetFlipKeyMap =
       <String, GlobalKey<FlipCardState>>{};
 

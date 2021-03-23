@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linuxstats/communication/websocketCommunication.dart';
+import 'package:flutter_linuxstats/data/computerDataManager.dart';
 import 'package:flutter_linuxstats/screens/statsMainScreen.dart';
 import 'package:flutter_linuxstats/utils/helper.dart';
 import 'package:flutter_linuxstats/utils/ownTheme.dart';
@@ -56,6 +57,8 @@ class _MyAppState extends State<MyApp> {
   void dispose() {
     WebsocketCommunication.currentWebsocketCommunication.channel.sink.close();
     WebsocketCommunication.currentWebsocketCommunication.timer?.cancel();
+
+    ComputerDataManager.computerDataController.sink.close();
     super.dispose();
   }
 }

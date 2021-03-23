@@ -4,8 +4,9 @@ import 'package:flutter_linuxstats/utils/screenManager.dart';
 import 'package:flutter_linuxstats/widgets/stats/statsHeaderWidget.dart';
 
 class StatsDetailWidget extends StatefulWidget {
-  StatsDetailWidget(this.typeString);
+  StatsDetailWidget(this.computerData, this.typeString);
 
+  final ComputerData computerData;
   final String typeString;
 
   @override
@@ -16,7 +17,7 @@ class _StatsDetailWidgetState extends State<StatsDetailWidget> {
   @override
   Widget build(BuildContext context) {
     final List<String> statsDetailList =
-        ComputerData.currentComputerData.getStatsDetailList(widget.typeString);
+        widget.computerData.getStatsDetailList(widget.typeString);
 
     return Card(
       elevation: 7.5,
