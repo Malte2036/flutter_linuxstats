@@ -32,17 +32,21 @@ dependencies:
   flutter:
     sdk: flutter
   
-  flutter_launcher_icons: 0.8.1
-  intl: 0.16.1
-  ping_discover_network: 0.2.0+1
-  shared_preferences: 0.5.12+4
-  url_launcher: 5.7.10
-  web_socket_channel: 1.1.0
-  wifi: 0.1.5
+  flutter_launcher_icons: any
+  intl: any
+  ping_discover_network: any
+  shared_preferences: any
+  url_launcher: any
+  web_socket_channel: any
+  wifi: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+dependency_overrides:
+  # Override path_provider to pick up fixes for FFI changes.
+  path_provider: ^2.0.0-nullsafety.1
 
 flutter_icons:
   image_path: "icon/icon.png" 
